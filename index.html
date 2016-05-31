@@ -1,10 +1,10 @@
 <html>
 
 <head>
+  <link rel='stylesheet' type='text/css' href='main.css' />
     <style>
         body {
             text-align: center;
-            background: #202020;
             font-family: gill sans;
             font-weight: 100;
         }
@@ -38,34 +38,50 @@
             border-radius: 3px;
             background: #c00b0b;
             display: inline-block;
+            /*width: 25%;
+            background: red;
+            border-radius: 100%;
+            height: 75%;*/
         }
 
         .smalltext {
             padding-top: 5px;
             font-size: 16px;
         }
+
+        #clock-container {
+          width: 100%;
+        }
+
+        #clockdiv div{
+
+        }
     </style>
 </head>
 
 <body>
     <h1 id='status'>Do Work</h1>
-    <div id="clockdiv">
-        <!-- <div>
-            <span class="days"></span>
-            <div class="smalltext">Days</div>
-        </div>
-        <div>
-            <span class="hours"></span>
-            <div class="smalltext">Hours</div>
-        </div> -->
-        <div>
-            <span class="minutes"></span>
-            <div class="smalltext">Minutes</div>
-        </div>
-        <div>
-            <span class="seconds"></span>
-            <div class="smalltext">Seconds</div>
-        </div>
+    <div id='clock-container'>
+
+      <div id="clockdiv">
+          <!-- <div>
+              <span class="days"></span>
+              <div class="smalltext">Days</div>
+          </div>
+          <div>
+              <span class="hours"></span>
+              <div class="smalltext">Hours</div>
+          </div> -->
+          <div>
+              <span class="minutes"></span>
+              <div class="smalltext">Minutes</div>
+          </div>
+          <div>
+              <span class="seconds"></span>
+              <div class="smalltext">Seconds</div>
+          </div>
+      </div>
+
     </div>
 <script>
 function getTimeRemaining(endtime) {
