@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+    background-color: #db3b11;
+    font-family: gill sans;
+}
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+/*main {
+    padding: 20px
+}*/
+#container, body, html {
+    height: 100%
+}
+#container {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+#installer {
+    position: absolute;
+    opacity: 0;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    -webkit-transition: opacity 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out
+}
+#installer.available {
+    opacity: 1
+}
+#installer .button {
+    border: solid 1px #fff;
+    margin: 10px;
+    padding: 10px;
+    color: #fff;
+    background-color: transparent
+}
+.horn {
+    height: 50vmin;
+    width: 50vmin
+}
+.horn .inner {
+    height: 40vmin;
+    width: 40vmin
+}
+.horn .inner .center {
+    height: 5vmin;
+    width: 5vmin
+}
+@-webkit-keyframes center-horning {
+    0% {
+        width: 5vmin;
+        height: 5vmin
+    }
+    to {
+        width: 4.6vmin;
+        heigt: 5.4vmin
+    }
+}
+@keyframes center-horning {
+    0% {
+        width: 5vmin;
+        height: 5vmin
+    }
+    to {
+        width: 4.6vmin;
+        heigt: 5.4vmin
+    }
+}
+@-webkit-keyframes middle-horning {
+    0% {
+        width: 40vmin;
+        height: 40vmin
+    }
+    to {
+        width: 40.2vmin;
+        heigt: 40.1vmin
+    }
+}
+@keyframes middle-horning {
+    0% {
+        width: 40vmin;
+        height: 40vmin
+    }
+    to {
+        width: 40.2vmin;
+        heigt: 40.1vmin
+    }
+}
+@-webkit-keyframes horning {
+    0% {
+        width: 50vmin;
+        height: 50vmin
+    }
+    to {
+        width: 50.1vmin;
+        heigt: 50.2vmin
+    }
+}
+@keyframes horning {
+    0% {
+        width: 50vmin;
+        height: 50vmin
+    }
+    to {
+        width: 50.1vmin;
+        heigt: 50.2vmin
+    }
+}
+.horn, .horn .inner {
+    border-radius: 50%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+.horn {
+    background-color: #f44336;
+    box-shadow: 0 5px 2px 0 #1565c0;
+    -webkit-transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1);
+    transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1)
+}
+.horn .inner {
+    background-color: #b71c1c
+}
+.horn .inner .center {
+    background-color: #000;
+    opacity: .9;
+    border-radius: 50%
+}
+.horn.horning, .horn.horning .center, .horn.horning .inner {
+    -webkit-animation-duration: 10ms;
+    animation-duration: 10ms;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate
+}
+.horn.horning {
+    box-shadow: 0 0 0 0 #1565c0;
+    -webkit-animation-name: horning;
+    animation-name: horning
+}
+.horn.horning .center, .horn.horning .inner {
+    -webkit-animation-name: middle-horning;
+    animation-name: middle-horning
+}
+.horn.horning .center {
+    -webkit-animation-duration: 50ms;
+    animation-duration: 50ms;
+    -webkit-animation-name: center-horning;
+    animation-name: center-horning
+}
