@@ -2,61 +2,6 @@
 
 <head>
   <link rel='stylesheet' type='text/css' href='main.css' />
-    <style>
-        body {
-            text-align: center;
-            font-family: gill sans;
-            font-weight: 100;
-        }
-
-        h1 {
-            color: #eee;
-            font-weight: 100;
-            font-size: 40px;
-            margin: 40px 0px 20px;
-            transition: 0.5s ease;
-        }
-
-        #clockdiv {
-            font-family: gill sans;
-            color: #fff;
-            display: inline-block;
-            font-weight: 100;
-            text-align: center;
-            font-size: 30px;
-        }
-
-        #clockdiv > div {
-            padding: 10px;
-            border-radius: 3px;
-            background: #970000;
-            display: inline-block;
-        }
-
-        #clockdiv div > span {
-            padding: 15px;
-            border-radius: 3px;
-            background: #c00b0b;
-            display: inline-block;
-            /*width: 25%;
-            background: red;
-            border-radius: 100%;
-            height: 75%;*/
-        }
-
-        .smalltext {
-            padding-top: 5px;
-            font-size: 16px;
-        }
-
-        #clock-container {
-          width: 100%;
-        }
-
-        #clockdiv div{
-
-        }
-    </style>
 </head>
 
 <body>
@@ -64,14 +9,7 @@
     <div id='clock-container'>
 
       <div id="clockdiv">
-          <!-- <div>
-              <span class="days"></span>
-              <div class="smalltext">Days</div>
-          </div>
-          <div>
-              <span class="hours"></span>
-              <div class="smalltext">Hours</div>
-          </div> -->
+        <div id='time-container'>
           <div>
               <span class="minutes"></span>
               <div class="smalltext">Minutes</div>
@@ -80,56 +18,103 @@
               <span class="seconds"></span>
               <div class="smalltext">Seconds</div>
           </div>
+          
+        </div>
+        <div>
+          <button id='five-min'>
+            5 minute break
+          </button>
+          <button id='ten-min'>
+            10 minute break
+          </button>
+        </div>
       </div>
 
     </div>
 <script>
-function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
-  return {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
-}
+(function () {
 
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  // var daysSpan = clock.querySelector('.days');
-  // var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
+  // Put this into external script
+  var timeinterval;
+  // let status = document.getElementById('status');
 
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
+  function getTimeRemaining(endtime) {
+    var t = Date.parse(endtime) - Date.parse(new Date());
+    var seconds = Math.floor((t / 1000) % 60);
+    var minutes = Math.floor((t / 1000 / 60) % 60);
+    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    return {
+      'total': t,
+      'days': days,
+      'hours': hours,
+      'minutes': minutes,
+      'seconds': seconds
+    };
+  }
 
-    // daysSpan.innerHTML = t.days;
-    // hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+  function initializeClock(id, endtime) {
+    var clock = document.getElementById(id);
+    // var daysSpan = clock.querySelector('.days');
+    // var hoursSpan = clock.querySelector('.hours');
+    var minutesSpan = clock.querySelector('.minutes');
+    var secondsSpan = clock.querySelector('.seconds');
 
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
+    function updateClock() {
+      var t = getTimeRemaining(endtime);
 
-      let status = document.getElementById('status');
+      // daysSpan.innerHTML = t.days;
+      // hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+      minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+      secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+      if (t.total <= 0) {
+        clearInterval(timeinterval);
+        doSomeWork(false);
+      }
+    }
+
+    updateClock();
+    timeinterval = setInterval(updateClock, 1000);
+  }
+
+  var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
+  // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+                                                  //  days hrs  mins seconds
+  initializeClock('clockdiv', deadline);
+
+  // Event listeners
+  var fiveMinButton = document.querySelector('#five-min');
+  var tenMinButton = document.querySelector('#ten-min');
+
+  // 2 min break
+  fiveMinButton.addEventListener('click', function () {
+    if(timeinterval){ clearInterval(timeinterval) }
+    // clearInterval(timeinterval);
+    // var deadline = new Date(Date.parse(new Date()) + 2 * 60 * 1000);
+  var deadline = new Date(Date.parse(new Date()) + 20 * 1000);
+    initializeClock('clockdiv', deadline);
+    doSomeWork(true);
+  });
+
+  // 5 min break
+  tenMinButton.addEventListener('click', function () {
+    if(timeinterval){ clearInterval(timeinterval) }
+    var deadline = new Date(Date.parse(new Date()) + 10 * 1000);
+    initializeClock('clockdiv', deadline);
+    doSomeWork(true);
+  });
+
+  function doSomeWork(work){
+    let status = document.getElementById('status');
+
+    if (work){
+      status.innerHTML = 'Do some work';
+    } else {
       status.innerHTML = 'Have a break';
     }
   }
-
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
-}
-
-var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
-// var deadline = new Date(Date.parse(new Date()) + 25 * 60 * 1000);
-// var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-initializeClock('clockdiv', deadline);
+}());
 </script>
 </body>
 </html>

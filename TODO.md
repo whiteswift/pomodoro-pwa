@@ -1,0 +1,1 @@
+- Create vector images for manifest icons
