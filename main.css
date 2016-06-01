@@ -76,6 +76,16 @@ h1 {
     display: inline-block;
 }
 
+#work-button {
+  width: 36vmin;
+  height: 10vmin;
+  border-radius: 2px;
+  background: #c00b0b;
+  border: 0;
+  cursor: pointer;
+  color: white;
+}
+
 .smalltext {
     padding-top: 5px;
     font-size: 16px;

@@ -11,16 +11,20 @@
       <div id="clockdiv">
         <div id='time-container'>
           <div>
-              <span class="minutes"></span>
-              <div class="smalltext">Minutes</div>
+              <span class="minutes">25</span>
+              <!-- <div class="smalltext">Minutes</div> -->
           </div>
           <div>
-              <span class="seconds"></span>
-              <div class="smalltext">Seconds</div>
+              <span class="seconds">00</span>
+              <!-- <div class="smalltext">Seconds</div> -->
           </div>
-          
         </div>
         <div>
+          <button id='work-button'>
+            Start Timer
+          </button>
+        </div>
+        <div id='break-buttons'>
           <button id='five-min'>
             5 minute break
           </button>
@@ -54,21 +58,20 @@
   }
 
   function initializeClock(id, endtime) {
+    // Pass through next intention - break pause or work pause.
     var clock = document.getElementById(id);
-    // var daysSpan = clock.querySelector('.days');
-    // var hoursSpan = clock.querySelector('.hours');
     var minutesSpan = clock.querySelector('.minutes');
     var secondsSpan = clock.querySelector('.seconds');
 
     function updateClock() {
       var t = getTimeRemaining(endtime);
 
-      // daysSpan.innerHTML = t.days;
-      // hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
       minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
       secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
       if (t.total <= 0) {
+        // Set off alarm
+        // Do some animations
         clearInterval(timeinterval);
         doSomeWork(false);
       }
@@ -78,40 +81,52 @@
     timeinterval = setInterval(updateClock, 1000);
   }
 
-  var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
-  // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-                                                  //  days hrs  mins seconds
-  initializeClock('clockdiv', deadline);
+  // var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
+  // // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+  //                                                 //  days hrs  mins seconds
+  // // initializeClock('clockdiv', deadline);
 
   // Event listeners
+  var workButton = document.querySelector('#work-button');
   var fiveMinButton = document.querySelector('#five-min');
   var tenMinButton = document.querySelector('#ten-min');
 
-  // 2 min break
+  workButton.addEventListener('click', function () {
+    setTimer(5);
+    doSomeWork(true);
+  });
+
   fiveMinButton.addEventListener('click', function () {
-    if(timeinterval){ clearInterval(timeinterval) }
-    // clearInterval(timeinterval);
-    // var deadline = new Date(Date.parse(new Date()) + 2 * 60 * 1000);
-  var deadline = new Date(Date.parse(new Date()) + 20 * 1000);
-    initializeClock('clockdiv', deadline);
-    doSomeWork(true);
+    setTimer(10);
+    doSomeWork(false);
   });
 
-  // 5 min break
   tenMinButton.addEventListener('click', function () {
-    if(timeinterval){ clearInterval(timeinterval) }
-    var deadline = new Date(Date.parse(new Date()) + 10 * 1000);
-    initializeClock('clockdiv', deadline);
-    doSomeWork(true);
+    setTimer(10);
+    doSomeWork(false);
   });
 
-  function doSomeWork(work){
-    let status = document.getElementById('status');
+  function setTimer(duration) {
+    if (timeinterval) { clearInterval(timeinterval) }
+    let deadline = new Date(Date.parse(new Date()) + duration * 1000);
+    // change back to minutes on release
+    // let deadline = new Date(Date.parse(new Date()) + duration * 60 * 1000);
+    initializeClock('clockdiv', duration);
+  }
 
-    if (work){
+  function doSomeWork(workit){
+    let status = document.getElementById('status');
+    let workButton = document.getElementById('work-button');
+    let breakButtons = document.getElementById('break-buttons');
+
+    if (workit){
       status.innerHTML = 'Do some work';
+      breakButtons.style.visibility = 'hidden';
+      workButton.style.visibility = 'visible';
     } else {
       status.innerHTML = 'Have a break';
+      breakButtons.style.visibility = 'visible';
+      workButton.style.visibility = 'hidden';
     }
   }
 }());
