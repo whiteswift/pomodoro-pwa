@@ -5,131 +5,145 @@
 </head>
 
 <body>
-    <h1 id='status'>Do Work</h1>
-    <div id='clock-container'>
-
-      <div id="clockdiv">
-        <div id='time-container'>
-          <div>
-              <span class="minutes">25</span>
-              <!-- <div class="smalltext">Minutes</div> -->
-          </div>
-          <div>
-              <span class="seconds">00</span>
-              <!-- <div class="smalltext">Seconds</div> -->
-          </div>
+  <h1 id='status'>Do Work</h1>
+  <div id='clock-container'>
+    <div id="clockdiv">
+      <div id='time-container'>
+        <div>
+          <span class="minutes">25</span>
+          <!-- <div class="smalltext">Minutes</div> -->
         </div>
         <div>
-          <button id='work-button'>
-            Start Timer
-          </button>
-        </div>
-        <div id='break-buttons'>
-          <button id='five-min'>
-            5 minute break
-          </button>
-          <button id='ten-min'>
-            10 minute break
-          </button>
+          <span class="seconds">00</span>
+          <!-- <div class="smalltext">Seconds</div> -->
         </div>
       </div>
-
+      <div>
+        <button id='work-button'>
+          Start Timer
+        </button>
+      </div>
+      <div id='break-buttons'>
+        <button id='five-min'>
+          5 minute break
+        </button>
+        <button id='ten-min'>
+          10 minute break
+        </button>
+      </div>
     </div>
-<script>
-(function () {
+  </div>
+  <script>
+  (function() {
 
-  // Put this into external script
-  var timeinterval;
-  // let status = document.getElementById('status');
+    // Put this into external script
+    var timeinterval = 0;
+    var timerType;
+    // let status = document.getElementById('status');
 
-  function getTimeRemaining(endtime) {
-    var t = Date.parse(endtime) - Date.parse(new Date());
-    var seconds = Math.floor((t / 1000) % 60);
-    var minutes = Math.floor((t / 1000 / 60) % 60);
-    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-    var days = Math.floor(t / (1000 * 60 * 60 * 24));
-    return {
-      'total': t,
-      'days': days,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
-    };
-  }
+    function getTimeRemaining(endtime) {
+      var t = Date.parse(endtime) - Date.parse(new Date());
+      var seconds = Math.floor((t / 1000) % 60);
+      var minutes = Math.floor((t / 1000 / 60) % 60);
+      var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+      var days = Math.floor(t / (1000 * 60 * 60 * 24));
+      return {
+        'total': t,
+        'days': days,
+        'hours': hours,
+        'minutes': minutes,
+        'seconds': seconds
+      };
+    }
 
-  function initializeClock(id, endtime) {
-    // Pass through next intention - break pause or work pause.
-    var clock = document.getElementById(id);
-    var minutesSpan = clock.querySelector('.minutes');
-    var secondsSpan = clock.querySelector('.seconds');
+    function initializeClock(id, endtime) {
+      // Pass through next intention - break pause or work pause.
+      var clock = document.getElementById(id);
+      var minutesSpan = clock.querySelector('.minutes');
+      var secondsSpan = clock.querySelector('.seconds');
 
-    function updateClock() {
-      var t = getTimeRemaining(endtime);
+      function updateClock() {
+        var t = getTimeRemaining(endtime);
 
-      minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-      secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
-      if (t.total <= 0) {
-        // Set off alarm
-        // Do some animations
-        clearInterval(timeinterval);
-        doSomeWork(false);
+        if (t.total <= 0) {
+          // Set off alarm
+          // Do some animations
+          clearInterval(timeinterval);
+          timerFinish();
+        }
+      }
+
+      updateClock();
+      timeinterval = setInterval(updateClock, 1000);
+    }
+
+    // var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
+    // // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+    //                                                 //  days hrs  mins seconds
+    // // initializeClock('clockdiv', deadline);
+
+    // Event listeners
+    var workButton = document.querySelector('#work-button');
+    var fiveMinButton = document.querySelector('#five-min');
+    var tenMinButton = document.querySelector('#ten-min');
+
+    workButton.addEventListener('click', function() {
+      setTimer(5);
+      doSomeWork(true);
+    });
+
+    fiveMinButton.addEventListener('click', function() {
+      setTimer(10);
+      doSomeWork(false);
+    });
+
+    tenMinButton.addEventListener('click', function() {
+      setTimer(10);
+      doSomeWork(false);
+    });
+
+    function setTimer(duration) {
+      if (timeinterval) {
+        clearInterval(timeinterval)
+      }
+      let deadline = new Date(Date.parse(new Date()) + duration * 1000);
+      // change back to minutes on release
+      // let deadline = new Date(Date.parse(new Date()) + duration * 60 * 1000);
+      initializeClock('clockdiv', deadline);
+    }
+
+    function doSomeWork(workit) {
+      let status = document.getElementById('status');
+      let workButton = document.getElementById('work-button');
+      let breakButtons = document.getElementById('break-buttons');
+
+      if (workit) {
+        status.innerHTML = 'Do some work';
+        breakButtons.style.visibility = 'hidden';
+        workButton.style.visibility = 'visible';
+        timerType = 'work';
+      } else {
+        status.innerHTML = 'Have a break';
+        breakButtons.style.visibility = 'visible';
+        workButton.style.visibility = 'hidden';
+        timerType = 'break';
       }
     }
 
-    updateClock();
-    timeinterval = setInterval(updateClock, 1000);
-  }
+    function timerFinish() {
+      if (timerType === 'work') {
+        doSomeWork(false); // You've already worked it, have a break
+      } else {
+        doSomeWork(true); // You've just had a break, get back to work
+      }
 
-  // var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
-  // // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-  //                                                 //  days hrs  mins seconds
-  // // initializeClock('clockdiv', deadline);
-
-  // Event listeners
-  var workButton = document.querySelector('#work-button');
-  var fiveMinButton = document.querySelector('#five-min');
-  var tenMinButton = document.querySelector('#ten-min');
-
-  workButton.addEventListener('click', function () {
-    setTimer(5);
-    doSomeWork(true);
-  });
-
-  fiveMinButton.addEventListener('click', function () {
-    setTimer(10);
-    doSomeWork(false);
-  });
-
-  tenMinButton.addEventListener('click', function () {
-    setTimer(10);
-    doSomeWork(false);
-  });
-
-  function setTimer(duration) {
-    if (timeinterval) { clearInterval(timeinterval) }
-    let deadline = new Date(Date.parse(new Date()) + duration * 1000);
-    // change back to minutes on release
-    // let deadline = new Date(Date.parse(new Date()) + duration * 60 * 1000);
-    initializeClock('clockdiv', duration);
-  }
-
-  function doSomeWork(workit){
-    let status = document.getElementById('status');
-    let workButton = document.getElementById('work-button');
-    let breakButtons = document.getElementById('break-buttons');
-
-    if (workit){
-      status.innerHTML = 'Do some work';
-      breakButtons.style.visibility = 'hidden';
-      workButton.style.visibility = 'visible';
-    } else {
-      status.innerHTML = 'Have a break';
-      breakButtons.style.visibility = 'visible';
-      workButton.style.visibility = 'hidden';
+      // timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
     }
-  }
-}());
-</script>
+  }());
+  </script>
 </body>
+
 </html>
