@@ -98,11 +98,13 @@
     fiveMinButton.addEventListener('click', function() {
       setTimer(10);
       doSomeWork(false);
+      breakButtons.style.visibility = 'hidden';
     });
 
     tenMinButton.addEventListener('click', function() {
       setTimer(10);
       doSomeWork(false);
+      breakButtons.style.visibility = 'hidden';
     });
 
     function setTimer(duration) {
@@ -134,13 +136,7 @@
     }
 
     function timerFinish() {
-      if (timerType === 'work') {
-        doSomeWork(false); // You've already worked it, have a break
-      } else {
-        doSomeWork(true); // You've just had a break, get back to work
-      }
-
-      // timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
+      timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
     }
   }());
   </script>
