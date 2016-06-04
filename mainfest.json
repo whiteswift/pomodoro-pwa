@@ -1,37 +1,15 @@
 {
   "name": "Pomodoro PWA",
   "short_name": "Pomodoro",
-  "icons": [{
-        "src": "images/touch/Pomodoro_128.png",
-        "type": "image/png
-        ",
-        "sizes": "128x128"
-      }, {
-        "src": "images/touch/Pomodoro_152.png",
-        "type": "image/png",
-        "sizes": "152x152"
-      }, {
-        "src": "images/touch/Pomodoro_144.png",
-        "type": "image/png",
-        "sizes": "144x144"
-      }, {
-        "src": "images/touch/Pomodoro_192.png",
-        "type": "image/png",
-        "sizes": "192x192"
-      },
+  "icons": [
       {
-        "src": "images/touch/Pomodoro_256.png",
+        "src": "assets/pomodoro_256.png",
         "type": "image/png",
         "sizes": "256x256"
-      },
-      {
-        "src": "images/touch/Pomodoro_512.png",
-        "type": "image/png",
-        "sizes": "512x512"
       }],
-  "start_url": "/?homescreen=1",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#db3b11",
-  "theme_color": "#db3b11"
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
 }
