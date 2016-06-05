@@ -1,14 +1,14 @@
 # TODO
 
 ## MVP
-- Hide buttons when buttons are pressed
-- Consider more messages: do some work, have a break, Break time is over, do work?
+- Find out what &#39; is used for
 - Service worker caching assets
   - HTTPS server
 - Push notifications
   - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
 - Add to home screen
   - https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android?hl=en
+- Consider more messages: do some work, have a break, Break time is over, do work?
 
 ## Nice to have
 - Get some design inspiration
