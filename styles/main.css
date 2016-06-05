@@ -76,19 +76,34 @@ h1 {
     display: inline-block;
 }
 
-#work-button {
-  width: 36vmin;
-  height: 10vmin;
-  border-radius: 2px;
-  background: #c00b0b;
-  border: 0;
-  cursor: pointer;
-  color: white;
+#tomato {
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0);
+    border: 0;
+    cursor: pointer;
+    color: white;
+    font-size: 11vmax;
+    outline: none;
 }
 
 .smalltext {
     padding-top: 5px;
     font-size: 16px;
+}
+
+
+@-webkit-keyframes fadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}  
+@keyframes fadeOut {
+    from { opacity: 1; }
+      to { opacity: 0; }
+}
+
+.tomato-active {
+    -webkit-animation: fadeOut 0.5s;
+    animation: fadeOut 0.5s;
 }
 
 /* Air horner stuff */

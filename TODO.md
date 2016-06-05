@@ -1,7 +1,6 @@
 # TODO
 
 ## MVP
-- Find out what &#39; is used for
 - Service worker caching assets
   - HTTPS server
 - Push notifications

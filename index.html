@@ -3,7 +3,7 @@
 <head>
   
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>🍅Pomodoro🍅</title>
+  <title>Pomodoro</title>
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="A glorified egg timer 🍅">
@@ -18,14 +18,13 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Pomodoro 🍅">
   
-  <link rel="icon" sizes="192x192" href="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png">
-  <link rel="apple-touch-icon" href="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png&#39;">
+
+  <link rel="icon" sizes="64x64" href="assets/pomodoro_64.png">
+  <link rel="apple-touch-icon" href="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png">
   
-  <meta name="msapplication-TileImage" content="/assets/touch/pomodoro_144.png">
-  <meta name="msapplication-TileColor" content="#cf3145">
   <meta name="theme-color" content="#cf3145">
   
-  <meta property="og:title" content="🍅Pomodoro🍅">
+  <meta property="og:title" content="Pomodoro 🍅">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png">
   <meta property="og:url" content="https://whiteswift.github.io/pomodoro/">
@@ -35,31 +34,33 @@
 </head>
 
 <body>
-  <h1 id='status'>Do Work</h1>
-  <div id='clock-container'>
-    <div id="clockdiv">
-      <div id='time-container'>
-        <div>
-          <span class="minutes">25</span>
-          <!-- <div class="smalltext">Minutes</div> -->
+  <div id='pomodoro'>
+    <h1 id='status'>Do Work</h1>
+    <div id='clock-container'>
+      <div id="clockdiv">
+        <div id='time-container'>
+          <div>
+            <span class="minutes">25</span>
+            <!-- <div class="smalltext">Minutes</div> -->
+          </div>
+          <div>
+            <span class="seconds">00</span>
+            <!-- <div class="smalltext">Seconds</div> -->
+          </div>
         </div>
         <div>
-          <span class="seconds">00</span>
-          <!-- <div class="smalltext">Seconds</div> -->
+          <button id='tomato'>
+            🍅
+          </button>
         </div>
-      </div>
-      <div>
-        <button id='work-button'>
-          Start Timer
-        </button>
-      </div>
-      <div id='break-buttons'>
-        <button id='five-min'>
-          5 minute break
-        </button>
-        <button id='ten-min'>
-          10 minute break
-        </button>
+        <div id='break-buttons'>
+          <button id='five-min'>
+            5 minute break
+          </button>
+          <button id='ten-min'>
+            10 minute break
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -130,13 +131,18 @@
     // // initializeClock('clockdiv', deadline);
 
     // Event listeners
-    var workButton = document.querySelector('#work-button');
+    var workButton = document.querySelector('#tomato');
     var fiveMinButton = document.querySelector('#five-min');
     var tenMinButton = document.querySelector('#ten-min');
+    var breakButtons = document.getElementById('break-buttons');
 
     workButton.addEventListener('click', function() {
       setTimer(5);
       doSomeWork(true);
+      // workButton.style.visibility = 'hidden';
+      // workButton.classList.remove("tomato-active");
+      workButton.classList.add("tomato-active");
+      // workButton.style.visibility = 'hidden';
     });
 
     fiveMinButton.addEventListener('click', function() {
@@ -152,9 +158,10 @@
     });
 
     function setTimer(duration) {
-      if (timeinterval) {
-        clearInterval(timeinterval)
-      }
+      // if (timeinterval) {
+      //   clearInterval(timeinterval)
+      // }
+      timeinterval ? clearInterval(timeinterval) : console.log('timeinterval not defined :/');
       let deadline = new Date(Date.parse(new Date()) + duration * 1000);
       // change back to minutes on release
       // let deadline = new Date(Date.parse(new Date()) + duration * 60 * 1000);
@@ -163,8 +170,8 @@
 
     function doSomeWork(workit) {
       let status = document.getElementById('status');
-      let workButton = document.getElementById('work-button');
-      let breakButtons = document.getElementById('break-buttons');
+      let workButton = document.getElementById('tomato');
+      // let breakButtons = document.getElementById('break-buttons');
 
       if (workit) {
         status.innerHTML = 'Do some work';
