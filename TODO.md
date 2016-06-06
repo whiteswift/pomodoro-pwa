@@ -1,8 +1,7 @@
 # TODO
 
 ## MVP
-- Service worker caching assets
-  - HTTPS server
+- Test Service worker is caching assets
 - Push notifications
   - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
 - Add to home screen
