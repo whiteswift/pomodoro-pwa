@@ -29,3 +29,5 @@ Temporary Items
 node_modules
 server.pem
 httpsServer.py
+cert.pem
+key.pem
