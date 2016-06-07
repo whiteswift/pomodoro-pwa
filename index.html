@@ -1,29 +1,29 @@
 <html>
 
 <head>
-  
+
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Pomodoro</title>
-  
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="A glorified egg timer 🍅">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <link rel="canonical" href="https://whiteswift.github.io/">
-  <link rel="manifest" href="https://whiteswift.github.io/pomodoro/manifest.json">
-  
+  <link rel="manifest" href="/manifest.json">
+
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Pomodoro 🍅">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Pomodoro 🍅">
-  
+
 
   <link rel="icon" sizes="64x64" href="assets/pomodoro_64.png">
   <link rel="apple-touch-icon" href="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png">
-  
+
   <meta name="theme-color" content="#cf3145">
-  
+
   <meta property="og:title" content="Pomodoro 🍅">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png">
@@ -155,6 +155,25 @@
       setTimer(10);
       doSomeWork(false);
       breakButtons.style.visibility = 'hidden';
+    });
+
+    // Add to homescreen event
+    window.addEventListener('beforeinstallprompt', function(e) {
+      // beforeinstallprompt Event fired
+
+      // e.userChoice will return a Promise.
+      // For more details read: http://www.html5rocks.com/en/tutorials/es6/promises/
+      e.userChoice.then(function(choiceResult) {
+
+        console.log(choiceResult.outcome);
+
+        if(choiceResult.outcome == 'dismissed') {
+          console.log('User cancelled home screen install');
+        }
+        else {
+          console.log('User added to home screen');
+        }
+      });
     });
 
     function setTimer(duration) {
