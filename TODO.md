@@ -1,13 +1,13 @@
 # TODO
 
 ## MVP
-- Test Service worker is caching assets
 - HTTPS server - openssl req -x509 -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
 - Add to home screen
   - https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android?hl=en
 - Push notifications
   - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
 - Consider more messages: do some work, have a break, Break time is over, do work?
+- Add airhorn noise when countdown finises
 
 ## Nice to have
 - Get some design inspiration

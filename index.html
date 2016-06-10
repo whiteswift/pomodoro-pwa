@@ -130,6 +130,66 @@
     //                                                 //  days hrs  mins seconds
     // // initializeClock('clockdiv', deadline);
 
+    function setTimer(duration) {
+      // if (timeinterval) {
+      //   clearInterval(timeinterval)
+      // }
+      timeinterval ? clearInterval(timeinterval) : console.log('timeinterval not defined :/');
+      let deadline = new Date(Date.parse(new Date()) + duration * 1000);
+      // change back to minutes on release
+      // let deadline = new Date(Date.parse(new Date()) + duration * 60 * 1000);
+      initializeClock('clockdiv', deadline);
+    }
+
+    function doSomeWork(workit) {
+      let status = document.getElementById('status');
+      let workButton = document.getElementById('tomato');
+      // let breakButtons = document.getElementById('break-buttons');
+
+      if (workit) {
+        status.innerHTML = 'Do some work';
+        breakButtons.style.visibility = 'hidden';
+        workButton.style.visibility = 'visible';
+        timerType = 'work';
+      } else {
+        status.innerHTML = 'Have a break';
+        breakButtons.style.visibility = 'visible';
+        workButton.style.visibility = 'hidden';
+        timerType = 'break';
+      }
+    }
+
+    function timerFinish() {
+      timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
+    }
+
+    // Desktop notifications
+    function notifyMe() {
+      // Let's check if the browser supports notifications
+      if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+      }
+
+      // Let's check whether notification permissions have already been granted
+      else if (Notification.permission === "granted") {
+        // If it's okay let's create a notification
+        var notification = new Notification("Hi there!");
+      }
+
+      // Otherwise, we need to ask the user for permission
+      else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+          // If the user accepts, let's create a notification
+          if (permission === "granted") {
+            var notification = new Notification("Hi there!");
+          }
+        });
+      }
+
+      // At last, if the user has denied notifications, and you
+      // want to be respectful there is no need to bother them any more.
+    }
+
     // Event listeners
     var workButton = document.querySelector('#tomato');
     var fiveMinButton = document.querySelector('#five-min');
@@ -176,38 +236,6 @@
       });
     });
 
-    function setTimer(duration) {
-      // if (timeinterval) {
-      //   clearInterval(timeinterval)
-      // }
-      timeinterval ? clearInterval(timeinterval) : console.log('timeinterval not defined :/');
-      let deadline = new Date(Date.parse(new Date()) + duration * 1000);
-      // change back to minutes on release
-      // let deadline = new Date(Date.parse(new Date()) + duration * 60 * 1000);
-      initializeClock('clockdiv', deadline);
-    }
-
-    function doSomeWork(workit) {
-      let status = document.getElementById('status');
-      let workButton = document.getElementById('tomato');
-      // let breakButtons = document.getElementById('break-buttons');
-
-      if (workit) {
-        status.innerHTML = 'Do some work';
-        breakButtons.style.visibility = 'hidden';
-        workButton.style.visibility = 'visible';
-        timerType = 'work';
-      } else {
-        status.innerHTML = 'Have a break';
-        breakButtons.style.visibility = 'visible';
-        workButton.style.visibility = 'hidden';
-        timerType = 'break';
-      }
-    }
-
-    function timerFinish() {
-      timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
-    }
   }());
   </script>
 </body>
