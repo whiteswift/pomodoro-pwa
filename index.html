@@ -3,7 +3,7 @@
 <head>
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Pomodoro</title>
+  <title>🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅</title>
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="A glorified egg timer 🍅">
@@ -35,7 +35,7 @@
 
 <body>
   <div id='pomodoro'>
-    <h1 id='status'>Do Work</h1>
+    <!-- <h1 id='status'>Do Work</h1> -->
     <div id='clock-container'>
       <div id="clockdiv">
         <div id='time-container'>
@@ -50,15 +50,16 @@
         </div>
         <div>
           <button id='tomato'>
-            🍅
+            <!-- 🍅 -->
+            <img src="assets/pomodoro_256.png" alt="tomato button">
           </button>
         </div>
         <div id='break-buttons'>
           <button id='five-min'>
-            5 minute break
+            5 MINS
           </button>
           <button id='ten-min'>
-            10 minute break
+            10 MINS
           </button>
         </div>
       </div>
@@ -117,7 +118,7 @@
           // Set off alarm
           // Do some animations
           clearInterval(timeinterval);
-          timerFinish();
+          onTimerFinish();
         }
       }
 
@@ -131,9 +132,6 @@
     // // initializeClock('clockdiv', deadline);
 
     function setTimer(duration) {
-      // if (timeinterval) {
-      //   clearInterval(timeinterval)
-      // }
       timeinterval ? clearInterval(timeinterval) : console.log('timeinterval not defined :/');
       let deadline = new Date(Date.parse(new Date()) + duration * 1000);
       // change back to minutes on release
@@ -142,25 +140,26 @@
     }
 
     function doSomeWork(workit) {
-      let status = document.getElementById('status');
+      // let status = document.getElementById('status');
       let workButton = document.getElementById('tomato');
-      // let breakButtons = document.getElementById('break-buttons');
+      let breakButtons = document.getElementById('break-buttons');
 
       if (workit) {
-        status.innerHTML = 'Do some work';
+        // status.innerHTML = 'Do some work';
         breakButtons.style.visibility = 'hidden';
         workButton.style.visibility = 'visible';
         timerType = 'work';
       } else {
-        status.innerHTML = 'Have a break';
+        // status.innerHTML = 'Have a break';
         breakButtons.style.visibility = 'visible';
         workButton.style.visibility = 'hidden';
         timerType = 'break';
       }
     }
 
-    function timerFinish() {
+    function onTimerFinish() {
       timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
+      // notifyMe();
     }
 
     // Desktop notifications
@@ -173,7 +172,7 @@
       // Let's check whether notification permissions have already been granted
       else if (Notification.permission === "granted") {
         // If it's okay let's create a notification
-        var notification = new Notification("Hi there!");
+        var notification = new Notification("Timer finished!");
       }
 
       // Otherwise, we need to ask the user for permission
@@ -181,13 +180,10 @@
         Notification.requestPermission(function (permission) {
           // If the user accepts, let's create a notification
           if (permission === "granted") {
-            var notification = new Notification("Hi there!");
+            var notification = new Notification("Timer finished!");
           }
         });
       }
-
-      // At last, if the user has denied notifications, and you
-      // want to be respectful there is no need to bother them any more.
     }
 
     // Event listeners
@@ -219,10 +215,7 @@
 
     // Add to homescreen event
     window.addEventListener('beforeinstallprompt', function(e) {
-      // beforeinstallprompt Event fired
 
-      // e.userChoice will return a Promise.
-      // For more details read: http://www.html5rocks.com/en/tutorials/es6/promises/
       e.userChoice.then(function(choiceResult) {
 
         console.log(choiceResult.outcome);
@@ -235,6 +228,8 @@
         }
       });
     });
+
+    Notification.requestPermission();
 
   }());
   </script>
