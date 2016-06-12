@@ -1,5 +1,6 @@
 {
   "name": "Pomodoro PWA",
+  "gcm_sender_id": "437420786537",
   "short_name": "Pomodoro",
   "icons": [
     {

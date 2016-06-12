@@ -4,29 +4,22 @@
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅🍅</title>
-
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="A glorified egg timer 🍅">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="canonical" href="https://whiteswift.github.io/">
   <link rel="manifest" href="/manifest.json">
-
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Pomodoro 🍅">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Pomodoro 🍅">
-
-
   <link rel="icon" sizes="64x64" href="assets/pomodoro_64.png">
-  <link rel="apple-touch-icon" href="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png">
-
+  <!-- <link rel="apple-touch-icon" href="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png"> -->
   <meta name="theme-color" content="#cf3145">
-
   <meta property="og:title" content="Pomodoro 🍅">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png">
+  <!-- <meta property="og:image" content="https://whiteswift.github.io/pomodoro/assets/touch/pomodoro_192.png"> -->
   <meta property="og:url" content="https://whiteswift.github.io/pomodoro/">
   <meta property="og:description" content="A glorified egg timer progressive web app. Nothing to install, just use it right away in your browser!">
 
@@ -41,11 +34,9 @@
         <div id='time-container'>
           <div>
             <span class="minutes">25</span>
-            <!-- <div class="smalltext">Minutes</div> -->
           </div>
           <div>
             <span class="seconds">00</span>
-            <!-- <div class="smalltext">Seconds</div> -->
           </div>
         </div>
         <div>
@@ -70,12 +61,19 @@
     navigator.serviceWorker.register('/sw.js', {
         scope: '/'
       })
-      .then(function(registration) {
+      .then(function(reg) {
         console.log('Service Worker Registered');
       });
 
-    navigator.serviceWorker.ready.then(function(registration) {
+    navigator.serviceWorker.ready.then(function(reg) {
       console.log('Service Worker Ready');
+    })
+    .then(function(reg) {
+      reg.pushManager.subscribe({
+          userVisibleOnly: true
+      }).then(function(sub) {
+          console.log('endpoint:', sub.endpoint);
+      });
     });
   }
   </script>
@@ -229,7 +227,8 @@
       });
     });
 
-    Notification.requestPermission();
+    // Request desktop permissions
+    // Notification.requestPermission();
 
   }());
   </script>
