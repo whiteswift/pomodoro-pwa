@@ -5,8 +5,11 @@ self.addEventListener('install', e => {
     caches.open('pomodoro').then(cache => {
       return cache.addAll([
         '/',
+        '/manifest.json',
         '/index.html',
-        '/styles/main.css'
+        '/styles/main.css',
+        '/assets/pomodoro_256.png',
+        '/assets/alarm.mp3'
       ])
       .then(() => self.skipWaiting());
     })
