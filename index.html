@@ -40,12 +40,12 @@
           </div>
         </div>
         <div>
-          <button id='tomato'>
+          <button id='tomato' class='visbible'>
             <!-- 🍅 -->
             <img src="assets/pomodoro_256.png" alt="tomato button">
           </button>
         </div>
-        <div id='break-buttons'>
+        <div id='break-buttons' class='hidden'>
           <button id='five-min'>
             5 MINS
           </button>
@@ -68,13 +68,14 @@
     navigator.serviceWorker.ready.then(function(reg) {
       console.log('Service Worker Ready');
     })
-    .then(function(reg) {
-      reg.pushManager.subscribe({
-          userVisibleOnly: true
-      }).then(function(sub) {
-          console.log('endpoint:', sub.endpoint);
-      });
-    });
+    // REGISTERING FOR PUSH NOTIFICATIONS
+    // .then(function(reg) {
+    //   reg.pushManager.subscribe({
+    //       userVisibleOnly: true
+    //   }).then(function(sub) {
+    //       console.log('endpoint:', sub.endpoint);
+    //   });
+    // });
   }
   </script>
   <script>
@@ -117,6 +118,7 @@
           // Do some animations
           clearInterval(timeinterval);
           onTimerFinish();
+          alarm.play();
         }
       }
 
@@ -142,15 +144,15 @@
       let workButton = document.getElementById('tomato');
       let breakButtons = document.getElementById('break-buttons');
 
-      if (workit) {
+      if (workit) { // If you're doing work, break buttons are hidden
         // status.innerHTML = 'Do some work';
-        breakButtons.style.visibility = 'hidden';
-        workButton.style.visibility = 'visible';
+        breakButtons.className = 'hidden';
+        workButton.className = 'visible';
         timerType = 'work';
       } else {
         // status.innerHTML = 'Have a break';
-        breakButtons.style.visibility = 'visible';
-        workButton.style.visibility = 'hidden';
+        breakButtons.className = 'visible';
+        workButton.className = 'hidden';
         timerType = 'break';
       }
     }
@@ -193,22 +195,17 @@
     workButton.addEventListener('click', function() {
       setTimer(5);
       doSomeWork(true);
-      // workButton.style.visibility = 'hidden';
-      // workButton.classList.remove("tomato-active");
-      workButton.classList.add("tomato-active");
-      // workButton.style.visibility = 'hidden';
+      // workButton.classList.add("tomato-active");
     });
 
     fiveMinButton.addEventListener('click', function() {
       setTimer(5);
       doSomeWork(false);
-      breakButtons.style.visibility = 'hidden';
     });
 
     tenMinButton.addEventListener('click', function() {
       setTimer(10);
       doSomeWork(false);
-      breakButtons.style.visibility = 'hidden';
     });
 
     // Add to homescreen event
@@ -227,11 +224,30 @@
       });
     });
 
+    function sound(src) {
+        var self = this;
+        self.sound = document.createElement("audio");
+        self.sound.src = src;
+        self.sound.setAttribute("preload", "auto");
+        self.sound.setAttribute("controls", "none");
+        self.sound.style.display = "none";
+        document.body.appendChild(self.sound);
+        self.play = function(){
+            self.sound.play();
+        }
+        self.stop = function(){
+            self.sound.pause();
+        }
+    }
+
+    var alarm = new sound('assets/alarm.mp3');
+
     // Request desktop permissions
     // Notification.requestPermission();
 
   }());
   </script>
+
 </body>
 
 </html>
