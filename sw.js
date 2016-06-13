@@ -5,6 +5,7 @@ self.addEventListener('install', e => {
     caches.open('pomodoro').then(cache => {
       return cache.addAll([
         '/',
+        '/sw.js',
         '/manifest.json',
         '/index.html',
         '/styles/main.css',

@@ -20,6 +20,7 @@
 - Quick uppercasing
 
 # Problems
+- Service worker needs a page secured with SSL otherwise it won't work. It will work locally on localhost or 127.0.0.1 without encryption. A static page on Github only gets you so far until you want to use a manifest file.
 - Authentication error - setting ignore authorisation flags in chrome://flags
 - Can't use Python server with SSL for SW
 - Talk about London technology week

@@ -1,8 +1,8 @@
 # TODO
 
 ## MVP
-- Add airhorn noise when countdown finises
-  - HTML5 audio
+- Vertical align clockdiv
+- Add airhorn noise when countdown finises for mobile using xhr
 - Test service worker is working when device adds PWA to homescreen
 - Push notifications
   - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
