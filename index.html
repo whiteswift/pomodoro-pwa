@@ -56,6 +56,7 @@
       </div>
     </div>
   </div>
+  <div class='sound-player'></div>
   <script type="text/javascript">
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js', {
@@ -68,21 +69,22 @@
     navigator.serviceWorker.ready.then(function(reg) {
       console.log('Service Worker Ready');
     })
-    .then(function(reg) {
-      reg.pushManager.subscribe({
-          userVisibleOnly: true
-      }).then(function(sub) {
-          console.log('endpoint:', sub.endpoint);
-      });
-    });
+    // REGISTERING FOR PUSH NOTIFICATIONS
+    // .then(function(reg) {
+    //   reg.pushManager.subscribe({
+    //       userVisibleOnly: true
+    //   }).then(function(sub) {
+    //       console.log('endpoint:', sub.endpoint);
+    //   });
+    // });
   }
-  </script>
-  <script>
+  
   (function() {
 
     // Put this into external script
     var timeinterval = 0;
     var timerType;
+
     // let status = document.getElementById('status');
 
     function getTimeRemaining(endtime) {
@@ -101,7 +103,6 @@
     }
 
     function initializeClock(id, endtime) {
-      // Pass through next intention - break pause or work pause.
       var clock = document.getElementById(id);
       var minutesSpan = clock.querySelector('.minutes');
       var secondsSpan = clock.querySelector('.seconds');
@@ -117,6 +118,7 @@
           // Do some animations
           clearInterval(timeinterval);
           onTimerFinish();
+          playAlarm();
         }
       }
 
@@ -124,10 +126,8 @@
       timeinterval = setInterval(updateClock, 1000);
     }
 
-    // var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
-    // // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-    //                                                 //  days hrs  mins seconds
-    // // initializeClock('clockdiv', deadline);
+    // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+                                                      //  days hrs  mins seconds
 
     function setTimer(duration) {
       timeinterval ? clearInterval(timeinterval) : console.log('timeinterval not defined :/');
@@ -227,11 +227,164 @@
       });
     });
 
-    // Request desktop permissions
+    function playAlarm() {
+      var alarm = document.querySelector('.sound-player');
+      alarm.click();
+      // alarm.play();
+    }
+
+    // function sound(src) {
+    //     var self = this;
+    //     self.sound = document.createElement("audio");
+    //     self.sound.src = src;
+    //     self.sound.setAttribute("preload", "auto");
+    //     self.sound.setAttribute("controls", "none");
+    //     self.sound.style.display = "none";
+    //     document.body.appendChild(self.sound);
+    //     self.play = function(){
+    //         self.sound.play();
+    //     }
+    //     self.stop = function(){
+    //         self.sound.pause();
+    //     }
+    // }
+    //
+    // var alarm = new sound('assets/alarm.mp3');
+
+    // REQUEST DESKTOP PERMISSIONS
     // Notification.requestPermission();
+
+    var Alarm = function() {
+      // Alarm Player
+      var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var self = this;
+      var source;
+      var buffer;
+
+      var loadSound = function(callback) {
+        callback = callback || function() {};
+
+        if(!!buffer == true) {
+          // If the buffer is already loaded, use that.
+          callback(buffer);
+          return;
+        }
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.onload = function() {
+          audioCtx.decodeAudioData(xhr.response, function(decodedBuffer) {
+            callback(decodedBuffer);
+          });
+        };
+
+        xhr.open('GET', '/assets/alarm.mp3' );
+        xhr.responseType = 'arraybuffer';
+        xhr.send();
+      };
+
+      this.start = function(opts) {
+        // var shouldLoop = opts.loop; // always loop if from an event.
+
+        loadSound(function(tmpBuffer) {
+          source = audioCtx.createBufferSource();
+          source.connect(audioCtx.destination);
+          source.buffer = tmpBuffer;
+
+          source.onended = function () {
+            self.stop();
+          };
+
+          source.start(0);
+          // source.loop = shouldLoop;
+          // source.loopStart = 0.24;
+          // source.loopEnd = 0.34;
+        });
+      };
+
+      this.stop = function() {
+        if(!!source === true)
+          source.loop = false;
+        this.onstopped();
+      };
+
+      this.onstopped = function() {};
+
+      var init = function() {
+
+        loadSound(function(decodedBuffer) {
+          buffer = decodedBuffer;
+        });
+      };
+
+      init();
+
+    };
+
+    // Controls alarm
+    // var tomato = document.getElementById('tomato');
+    var soundPlayer = document.querySelector('.sound-player');
+    var alarm = new Alarm();
+
+    var start = function (e) {
+      if(!!e == true) { // Cast to bool then invert
+        e.preventDefault();
+
+        if(e.touches && e.touches.length > 1) {
+          // Multi touch. OFF.
+          return false;
+        }
+      }
+
+      // this.start({loop: true});
+      this.start();
+    }
+
+    var stop = function(e) {
+      if(!!e == true) e.preventDefault(); // Cast to bool then invert
+      this.stop();
+    }
+
+    this.start = function(opts) {
+      // Play the sound
+      alarm.start(opts);
+      // Start animation
+      // soundPlayer.classList.add('');
+
+      alarm.onstopped = function() {
+        // Stop animation
+        // soundPlayer.classList.remove('');
+      };
+    };
+
+    this.stop = function() {
+      // Stop the sound
+      alarm.stop();
+      // Stop animation
+      // soundPlayer.classList.remove('');
+    };
+
+    soundPlayer.addEventListener('mousedown', start.bind(this));
+    soundPlayer.addEventListener('touchstart', start.bind(this));
+
+    document.documentElement.addEventListener('mouseup', stop.bind(this));
+    document.documentElement.addEventListener('touchend', stop.bind(this));
 
   }());
   </script>
+
+
+  <!-- <script type='text/javascript'>
+  // // var soundButton = document.getElementById('sound-button');
+  // soundButton.addEventListener('click', function() {
+  //   var alarm = document.getElementById('alarm');
+  //   alarm.play()
+  // });
+  </script>
+  <audio id='alarm' src="/assets/alarm.mp3">
+    <p>Your browser does not support the <code>audio</code> element.</p>
+  </audio> -->
+
 </body>
 
 </html>
