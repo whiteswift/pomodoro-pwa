@@ -9,7 +9,6 @@
 - Download chrome canary and use application tool
 - View phone model in debug panel
 
-
 # Technologies used
 - Service worker gets by without https on localhost
 - Add to homescreen with manifest file - adds a splash screen and
@@ -17,7 +16,7 @@
 - vmin vmax
 - unicode emojis everywhere - in the title too
 - Open dev tools and press CMD + shift + P
-- Quick uppercasing
+
 
 # Problems
 - Service worker needs a page secured with SSL otherwise it won't work. It will work locally on localhost or 127.0.0.1 without encryption. A static page on Github only gets you so far until you want to use a manifest file.
@@ -31,3 +30,4 @@
 Event listeners removed from image - including the countdown
 set invisible div to have sound events attached
 event listeners on button - DONT want.
+- Quick uppercasing

@@ -2,6 +2,7 @@
 
 ## MVP
 - Vertical align clockdiv
+- Refactor layout using flexbox
 - Add airhorn noise when countdown finises for mobile using xhr
 - Test service worker is working when device adds PWA to homescreen
 - Push notifications
