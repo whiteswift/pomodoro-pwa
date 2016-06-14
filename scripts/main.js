@@ -70,7 +70,7 @@
       workButton.className = 'visible';
       timerType = 'work';
     } else {
-      status.innerHTML = 'Chill out';
+      status.innerHTML = 'Chill out time';
       breakButtons.className = 'visible';
       workButton.className = 'hidden';
       timerType = 'break';

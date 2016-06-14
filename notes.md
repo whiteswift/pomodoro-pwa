@@ -1,5 +1,6 @@
 
-# What is Pomodoro?
+# Intro - What is Pomodoro?
+- this talk will be a mix of a technology showcase and productivity tool.
 - I've been working on a small PWA project called Pomodoro
 - Pomodoro means tomato in the language of our evil paymasters
 - Pomododro came in handy outside of work at uni when work time was unstructured
@@ -16,7 +17,6 @@
 - vmin vmax
 - unicode emojis everywhere - in the title too
 - Open dev tools and press CMD + shift + P
-
 
 # Problems
 - Service worker needs a page secured with SSL otherwise it won't work. It will work locally on localhost or 127.0.0.1 without encryption. A static page on Github only gets you so far until you want to use a manifest file.
