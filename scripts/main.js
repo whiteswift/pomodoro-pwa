@@ -1,6 +1,5 @@
 (function() {
 
-  // Put this into external script
   var timeinterval = 0;
   var timerType;
   var status = document.getElementById('status');
@@ -21,7 +20,6 @@
   }
 
   function initializeClock(id, endtime) {
-    // Pass through next intention - break pause or work pause.
     var clock = document.getElementById(id);
     var minutesSpan = clock.querySelector('.minutes');
     var secondsSpan = clock.querySelector('.seconds');
@@ -33,8 +31,7 @@
       secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
       if (t.total <= 0) {
-        // Set off alarm
-        // Do some animations
+        // TODO: add animations
         clearInterval(timeinterval);
         onTimerFinish();
         alarm.play();
@@ -46,21 +43,15 @@
     timeinterval = setInterval(updateClock, 1000);
   }
 
-  // var deadline = new Date(Date.parse(new Date()) + 1 * 1000);
-  // // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-  //                                                 //  days hrs  mins seconds
-  // // initializeClock('clockdiv', deadline);
+  // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
 
-  function setTimer(duration) {
+  function setTimer(duration) { // Duration in seconds
     timeinterval ? clearInterval(timeinterval) : console.log('Time to work-it');
     let deadline = new Date(Date.parse(new Date()) + duration * 1000);
-    // change back to minutes on release
-    // let deadline = new Date(Date.parse(new Date()) + duration * 60 * 1000);
     initializeClock('clockdiv', deadline);
   }
 
   function doSomeWork(workit) {
-    // let status = document.getElementById('status');
     let workButton = document.getElementById('tomato');
     let breakButtons = document.getElementById('break-buttons');
 
@@ -79,7 +70,7 @@
 
   function onTimerFinish() {
     timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
-    // notifyMe();
+    notifyMe();
   }
 
   // Event listeners
@@ -90,6 +81,7 @@
 
   workButton.addEventListener('click', function() {
     status.innerHTML = '';
+    // setTimer(25*60);
     setTimer(5);
     doSomeWork(true);
     // workButton.classList.add("tomato-active");
@@ -101,7 +93,7 @@
   });
 
   tenMinButton.addEventListener('click', function() {
-    setTimer(600);
+    setTimer(10*60);
     doSomeWork(false);
   });
 
@@ -140,31 +132,30 @@
   var alarm = new sound('assets/alarm.mp3');
 
   // Desktop notifications
+  function notifyMe() {
+    // Check if the browser supports notifications
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
 
-  // function notifyMe() {
-  //   // Check if the browser supports notifications
-  //   if (!("Notification" in window)) {
-  //     alert("This browser does not support desktop notification");
-  //   }
-  //
-  //   // Let's check whether notification permissions have already been granted
-  //   else if (Notification.permission === "granted") {
-  //     // If it's okay let's create a notification
-  //     var notification = new Notification("Timer finished!");
-  //   }
-  //
-  //   // Otherwise, we need to ask the user for permission
-  //   else if (Notification.permission !== 'denied') {
-  //     Notification.requestPermission(function (permission) {
-  //       // If the user accepts, let's create a notification
-  //       if (permission === "granted") {
-  //         var notification = new Notification("Timer finished!");
-  //       }
-  //     });
-  //   }
-  // }
+    // Let's check whether notification permissions have already been granted
+    else if (Notification.permission === "granted") {
+      // If it's okay let's create a notification
+      var notification = new Notification("Timer finished!");
+    }
+
+    // Otherwise, we need to ask the user for permission
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
+          var notification = new Notification("Timer finished!");
+        }
+      });
+    }
+  }
 
   // Request desktop permissions
-  // Notification.requestPermission();
+  Notification.requestPermission();
 
 }());
