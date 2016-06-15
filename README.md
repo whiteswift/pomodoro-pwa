@@ -2,7 +2,7 @@
 
 A glorified egg timer
 
-![alt tag](https://raw.githubusercontent.com/whiteswift/pomodoro-pwa/assets/wallpaper.png)
+![alt tag](https://raw.githubusercontent.com/whiteswift/pomodoro-pwa/master/assets/wallpaper.png)
 
 ## Usage
 
