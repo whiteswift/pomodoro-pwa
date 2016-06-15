@@ -1,8 +1,16 @@
 # Pomodoro-PWA
 
-A glorified egg timer
+An offline friendly, time management web app, built using service workers.
 
+## What is Pomodoro?
+
+ Forces you to work in 25 minute, 5 minute break cycles so that you can keep your concentration for longer periods of time.
+
+(Tl:dr: A glorified egg timer)
+
+<div style='text-align: center;'>
 ![alt tag](https://raw.githubusercontent.com/whiteswift/pomodoro-pwa/master/assets/wallpaper.png)
+</div>
 
 ## Usage
 
