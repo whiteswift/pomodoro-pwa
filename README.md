@@ -8,9 +8,7 @@ An offline friendly, time management web app, built using service workers.
 
 (Tl:dr: A glorified egg timer)
 
-<div style='text-align: center;'>
 ![alt tag](https://raw.githubusercontent.com/whiteswift/pomodoro-pwa/master/assets/wallpaper.png)
-</div>
 
 ## Usage
 

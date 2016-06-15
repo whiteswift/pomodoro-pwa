@@ -81,14 +81,13 @@
 
   workButton.addEventListener('click', function() {
     status.innerHTML = '';
-    // setTimer(25*60);
-    setTimer(5);
+    setTimer(25*60);
     doSomeWork(true);
     // workButton.classList.add("tomato-active");
   });
 
   fiveMinButton.addEventListener('click', function() {
-    setTimer(5);
+    setTimer(25*60);
     doSomeWork(false);
   });
 
