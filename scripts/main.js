@@ -46,7 +46,7 @@
   // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
 
   function setTimer(duration) { // Duration in seconds
-    timeinterval ? clearInterval(timeinterval) : console.log('Time to work-it');
+    timeinterval ? clearInterval(timeinterval) : console.log('Work Work Work Work Work');
     let deadline = new Date(Date.parse(new Date()) + duration * 1000);
     initializeClock('clockdiv', deadline);
   }
@@ -87,7 +87,7 @@
   });
 
   fiveMinButton.addEventListener('click', function() {
-    setTimer(25*60);
+    setTimer(5*60);
     doSomeWork(false);
   });
 
