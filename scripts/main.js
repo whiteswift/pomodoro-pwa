@@ -105,7 +105,7 @@
       localStorage.setItem('volume',false);
     }
     else {
-      volumeButton.children[0].setAttribute('src','assets/volume_on.svg'); 
+      volumeButton.children[0].setAttribute('src','assets/volume_on.svg');
       localStorage.setItem('volume',true);
     }
 
@@ -166,9 +166,12 @@
 
   function checkVolume(){
     let vol = localStorage.getItem('volume');
-    if (vol !== 'false' || vol !== null) {
+    if (vol === 'true') {
       volumeButton.children[0].setAttribute('src','assets/volume_on.svg');
       localStorage.setItem('volume',true);
+    } else {
+      volumeButton.children[0].setAttribute('src','assets/volume_muted.svg');
+      localStorage.setItem('volume',false);
     }
   }
 

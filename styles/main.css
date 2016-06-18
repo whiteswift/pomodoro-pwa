@@ -13,11 +13,11 @@ body {
 }
 
 .visible {
-  visibility: visible;
+  display: inline-block;
 }
 
 .hidden {
-  visibility: hidden;
+  display: none;
 }
 
 #container, body, html {
@@ -60,10 +60,11 @@ h1 {
     position: relative;
 }
 
-#clockdiv > div {
+/*#clockdiv > div {
     padding: 10px;
     border-radius: 3px;
-}
+    height: 27vmin;
+}*/
 
 #clockdiv div > span {
     padding: 21px;
@@ -78,6 +79,11 @@ h1 {
 
 #clock-container {
   width: 100%;
+}
+
+#time-container {
+    padding: 10px;
+    border-radius: 3px;
 }
 
 #time-container > div {
@@ -107,6 +113,12 @@ h1 {
     width: 4vw;
     position: relative;
     top: 0.5vw;
+}
+
+#button-container {
+    padding: 10px;
+    border-radius: 3px;
+    height: 27vmin;
 }
 
 #break-buttons > button {
