@@ -1,4 +1,5 @@
 (function() {
+  'use strict';
 
   var timeinterval = 0;
   var timerType;
@@ -34,7 +35,8 @@
         // TODO: add animations
         clearInterval(timeinterval);
         onTimerFinish();
-        alarm.play();
+        let volume = localStorage.getItem('volume');
+        volume === 'true' ? alarm.play() : console.log('Volume muted');
         timerType === 'work' ? status.innerHTML = 'Get ready to work it' : status.innerHTML = 'Chill out mate!';
       }
     }
@@ -78,6 +80,7 @@
   var fiveMinButton = document.querySelector('#five-min');
   var tenMinButton = document.querySelector('#ten-min');
   var breakButtons = document.getElementById('break-buttons');
+  var volumeButton = document.getElementById('volume');
 
   workButton.addEventListener('click', function() {
     status.innerHTML = '';
@@ -94,6 +97,18 @@
   tenMinButton.addEventListener('click', function() {
     setTimer(10*60);
     doSomeWork(false);
+  });
+
+  volumeButton.addEventListener('click', function(){
+    if (localStorage.getItem('volume') === 'true') {
+      volumeButton.children[0].setAttribute('src','assets/volume_muted.svg');
+      localStorage.setItem('volume',false);
+    }
+    else {
+      volumeButton.children[0].setAttribute('src','assets/volume_on.svg'); 
+      localStorage.setItem('volume',true);
+    }
+
   });
 
   // Add to homescreen event
@@ -136,14 +151,9 @@
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
     }
-
-    // Let's check whether notification permissions have already been granted
     else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
       var notification = new Notification("Timer finished!");
     }
-
-    // Otherwise, we need to ask the user for permission
     else if (Notification.permission !== 'denied') {
       Notification.requestPermission(function (permission) {
         // If the user accepts, let's create a notification
@@ -154,7 +164,16 @@
     }
   }
 
+  function checkVolume(){
+    let vol = localStorage.getItem('volume');
+    if (vol !== 'false' || vol !== null) {
+      volumeButton.children[0].setAttribute('src','assets/volume_on.svg');
+      localStorage.setItem('volume',true);
+    }
+  }
+
   // Request desktop permissions
   Notification.requestPermission();
+  checkVolume();
 
 }());

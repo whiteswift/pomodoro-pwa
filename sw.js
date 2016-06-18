@@ -12,12 +12,19 @@ self.addEventListener('install', e => {
         '/assets/pomodoro_256.png',
         '/assets/pomodoro_144.png',
         '/assets/pomodoro_64.png',
+        '/assets/volume_on.svg',
+        '/assets/volume_muted.svg',
         '/assets/alarm.mp3'
       ])
       .then(() => self.skipWaiting());
     })
   )
 });
+
+// '/assets/pomodoro_256.png',
+//         '/assets/pomodoro_144.png',
+//         '/assets/pomodoro_64.png',
+//         '/assets/alarm.mp3'
 
 self.addEventListener('activate',  event => {
   event.waitUntil(self.clients.claim());

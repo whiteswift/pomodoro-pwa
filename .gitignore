@@ -31,3 +31,4 @@ server.pem
 httpsServer.py
 cert.pem
 key.pem
+*.txt
