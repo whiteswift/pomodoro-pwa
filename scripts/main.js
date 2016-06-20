@@ -72,7 +72,7 @@
 
   function onTimerFinish() {
     timerType === 'work' ? doSomeWork(false) : doSomeWork(true);
-    notifyMe();
+    displayNotification();
   }
 
   // Event listeners
@@ -86,7 +86,6 @@
     status.innerHTML = '';
     setTimer(25*60);
     doSomeWork(true);
-    // workButton.classList.add("tomato-active");
   });
 
   fiveMinButton.addEventListener('click', function() {
@@ -146,7 +145,7 @@
   var alarm = new sound('assets/alarm.mp3');
 
   // Desktop notifications
-  function notifyMe() {
+  function displayNotification() {
     // Check if the browser supports notifications
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
@@ -166,7 +165,7 @@
 
   function checkVolume(){
     let vol = localStorage.getItem('volume');
-    if (vol === 'true') {
+    if (vol === 'true' || vol === '') {
       volumeButton.children[0].setAttribute('src','assets/volume_on.svg');
       localStorage.setItem('volume',true);
     } else {

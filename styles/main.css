@@ -46,7 +46,7 @@ h1 {
     color: #eee;
     font-weight: 100;
     font-size: 10vmin;
-    margin: 40px 0px 20px;
+    padding-top: 6vmin;
     transition: 0.5s ease;
 }
 
@@ -56,15 +56,9 @@ h1 {
     display: inline-block;
     font-weight: 100;
     text-align: center;
-    font-size: 30px;
+    font-size: 5vmin;
     position: relative;
 }
-
-/*#clockdiv > div {
-    padding: 10px;
-    border-radius: 3px;
-    height: 27vmin;
-}*/
 
 #clockdiv div > span {
     padding: 21px;
@@ -100,19 +94,26 @@ h1 {
     outline: none;
 }
 
+#volume-container {
+    width: 100%;
+    position: fixed;
+    bottom: 5vmin;
+}
+
 #volume {
     border: 0.3vw solid white;
-    width: 5vw;
+    width: 8vmin;
+    height: 8vmin;
     border-radius: 100%;
-    height: 5vw;
     margin: 0 auto;
     cursor: pointer;
+    outline: none;
 }
 
 #volume > img {
-    width: 4vw;
+    width: 6vmin;
     position: relative;
-    top: 0.5vw;
+    top: 1vmin;
 }
 
 #button-container {

@@ -1,10 +1,8 @@
 # TODO
 
 ## MVP
-- Vertical align clockdiv
 - Refactor layout using flexbox
 - Add airhorn noise when countdown finises for mobile using xhr
-- Test service worker is working when device adds PWA to homescreen
 - Push notifications
   - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
 - Consider more messages: do some work, have a break, Break time is over, do work?
