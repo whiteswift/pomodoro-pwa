@@ -32,3 +32,4 @@ httpsServer.py
 cert.pem
 key.pem
 *.txt
+notes.md
