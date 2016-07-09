@@ -84,7 +84,7 @@
 
   workButton.addEventListener('click', function() {
     status.innerHTML = '';
-    setTimer(25*60);
+    setTimer(5);
     doSomeWork(true);
   });
 
