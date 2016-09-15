@@ -9,6 +9,8 @@ self.addEventListener('install', e => {
         '/index.html',
         '/scripts/main.js',
         '/styles/main.css',
+        '/assets/Apercu.woff',
+        '/assets/gotham-medium.woff',
         '/assets/pomodoro_256.png',
         '/assets/pomodoro_144.png',
         '/assets/pomodoro_64.png',
