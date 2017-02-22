@@ -1,4 +1,4 @@
-// v1.0
+// v1.1
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -22,11 +22,6 @@ self.addEventListener('install', e => {
     })
   )
 });
-
-// '/assets/pomodoro_256.png',
-//         '/assets/pomodoro_144.png',
-//         '/assets/pomodoro_64.png',
-//         '/assets/alarm.mp3'
 
 self.addEventListener('activate',  event => {
   event.waitUntil(self.clients.claim());
