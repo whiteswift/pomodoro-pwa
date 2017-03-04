@@ -9,14 +9,14 @@ self.addEventListener('install', e => {
         '/index.html',
         '/scripts/main.js',
         '/styles/main.css',
-        '/assets/Apercu.woff',
-        '/assets/gotham-medium.woff',
-        '/assets/pomodoro_256.png',
-        '/assets/pomodoro_144.png',
-        '/assets/pomodoro_64.png',
-        '/assets/volume_on.svg',
-        '/assets/volume_muted.svg',
-        '/assets/alarm.mp3'
+        '/assets/fonts/Apercu.woff',
+        '/assets/fonts/gotham-medium.woff',
+        '/assets/images/pomodoro_256.png',
+        '/assets/images/pomodoro_144.png',
+        '/assets/images/pomodoro_64.png',
+        '/assets/images/volume_on.svg',
+        '/assets/images/volume_muted.svg',
+        '/assets/media/alarm.mp3'
       ])
       .then(() => self.skipWaiting());
     })

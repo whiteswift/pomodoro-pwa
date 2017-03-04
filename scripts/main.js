@@ -100,11 +100,11 @@
 
   volumeButton.addEventListener('click', function(){
     if (localStorage.getItem('volume') === 'true') {
-      volumeButton.children[0].setAttribute('src','assets/volume_muted.svg');
+      volumeButton.children[0].setAttribute('src','assets/images/volume_muted.svg');
       localStorage.setItem('volume',false);
     }
     else {
-      volumeButton.children[0].setAttribute('src','assets/volume_on.svg');
+      volumeButton.children[0].setAttribute('src','assets/images/volume_on.svg');
       localStorage.setItem('volume',true);
     }
 
@@ -142,7 +142,7 @@
       };
   }
 
-  var alarm = new sound('assets/alarm.mp3');
+  var alarm = new sound('assets/media/alarm.mp3');
 
   // Desktop notifications
   function displayNotification() {
@@ -166,10 +166,10 @@
   function checkVolume(){
     let vol = localStorage.getItem('volume');
     if (vol === 'false' || vol === '') {
-      volumeButton.children[0].setAttribute('src','assets/volume_muted.svg');
+      volumeButton.children[0].setAttribute('src','assets/images/volume_muted.svg');
       localStorage.setItem('volume',false);
     } else {
-      volumeButton.children[0].setAttribute('src','assets/volume_on.svg');
+      volumeButton.children[0].setAttribute('src','assets/images/volume_on.svg');
       localStorage.setItem('volume',true);
     }
   }
