@@ -10,7 +10,7 @@ Tl:dr: a glorified egg timer
 
 See more about the science: http://pomodorotechnique.com/
 
-![alt tag](https://raw.githubusercontent.com/whiteswift/pomodoro-pwa/master/assets/wallpaper.png)
+![alt tag](https://raw.githubusercontent.com/whiteswift/pomodoro-pwa/master/assets/images/wallpaper.png)
 
 ## Usage
 
