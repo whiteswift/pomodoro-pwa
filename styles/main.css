@@ -53,10 +53,7 @@ h1 {
     padding-top: 6vw;
     transition: 0.5s ease;
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 #clockdiv {
     color: #fff;
     display: inline-block;
@@ -66,11 +63,11 @@ h1 {
     position: relative;
 }
 #clockdiv div > span {
-    padding: 21px;
+    padding: 0.3em;
     border-radius: 3px;
     background: #c22640;
     display: inline-block;
-    letter-spacing: 1px; 
+    letter-spacing: 1px;
     font-size: 12vmax;
     color: white;
 }
@@ -78,7 +75,7 @@ h1 {
   width: 100%;
 }
 #time-container {
-    font-family: 'Apercu', gill sans;
+    font-family: Helvetica, Arial, Sans-serif;/*'Apercu', gill sans;*/
     padding: 10px;
     border-radius: 3px;
 }
@@ -117,16 +114,17 @@ h1 {
     border-radius: 3px;
     height: 27vmin;
 }
+
 #break-buttons > button {
     padding: 15px;
-    width: 20vmax;
+    width: 8em;
     outline: none;
     background: #fed345;
     border: none;
     color: #a02837;
     font-weight: 600;
     font-size: 6vmin;
-    border-radius: 5px;
+    border-radius: 3px;
     text-align: center;
     cursor: pointer;
     text-transform: uppercase;
@@ -140,9 +138,6 @@ h1 {
 @keyframes fadeOut {
     from { opacity: 1; }
       to { opacity: 0; }
-<<<<<<< Updated upstream
-}
-=======
 }
 
 /*.tomato-active {
@@ -171,4 +166,3 @@ h1 {
     color: #fff;
     background-color: transparent
 }
->>>>>>> Stashed changes

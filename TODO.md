@@ -1,8 +1,13 @@
 # TODO
 
 ## MVP
-- Refactor layout using flexbox
-- Add airhorn noise when countdown finises for mobile using xhr
+DONE- Display fullscreen in manifest file
+- Replace text with monospace font
+- Replace tomato image with Lillian's
+- Replace favicon
+- Replace theme colours
+- Refactor layout using flexbox/css grid
+- Add airhorn noise when countdown finishes for mobile using xhr
 - Push notifications
   - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
 - Consider more messages: do some work, have a break, Break time is over, do work?
@@ -10,6 +15,7 @@
 ## Nice to have
 - Get some design inspiration
 - Change background colour when working/not working
+- Media queries to support wide screens
 - Stop clock button
 - Animations
   - When buttons are pressed
