@@ -1,4 +1,4 @@
-// v1.2
+// v1.3
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -9,7 +9,6 @@ self.addEventListener('install', e => {
         '/index.html',
         '/scripts/main.js',
         '/styles/main.css',
-        '/assets/fonts/Apercu.woff',
         '/assets/fonts/gotham-medium.woff',
         '/assets/images/pomodoro_256.png',
         '/assets/images/pomodoro_144.png',
