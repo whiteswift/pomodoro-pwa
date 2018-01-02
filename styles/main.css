@@ -1,9 +1,8 @@
 body {
     margin: 0;
-    background-color: #cf3145;
-    text-align: center;
     font-weight: 100;
     -webkit-font-smoothing: antialiased;
+    font-display: swap;
 }
 * {
     -webkit-user-select: none;

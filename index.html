@@ -1,12 +1,12 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>🍅</title>
+  <title>Pomodoro</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="A glorified egg timer 🍅">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://whiteswift.github.io/">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="canonical" href="https://whiteswift.github.io/pomodoro-pwa">
+  <link rel="manifest" href="manifest.json">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="application-name" content="Pomodoro 🍅">
@@ -16,8 +16,9 @@
   <meta name="theme-color" content="#cf3145">
   <meta property="og:title" content="Pomodoro 🍅">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://whiteswift.github.io/pomodoro/">
+  <meta property="og:url" content="https://whiteswift.github.io/pomodoro-pwa/">
   <meta property="og:description" content="A glorified egg timer progressive web app. Add it to your homescreen, it acts like a native app!">
+  <style>body{background-color:#cf3145;text-align:center;}</style>
   <link rel='stylesheet' type='text/css' href='styles/main.css' />
 </head>
 <body>
@@ -56,12 +57,12 @@
   </div>
   <script type="text/javascript">
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js', {
-        scope: '/'
-      })
-      .then(function(reg) {
-        console.log('Service Worker Registered');
-      });
+    navigator.serviceWorker.register('pomodoro_sw.js', {
+      scope: './'
+    })
+    .then(function(reg) {
+      console.log('Service Worker Registered');
+    });
 
     navigator.serviceWorker.ready.then(function(reg) {
       console.log('Service Worker Ready');
