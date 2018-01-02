@@ -12,17 +12,14 @@ See more about the science: http://pomodorotechnique.com/
 
 ![alt tag](https://raw.githubusercontent.com/whiteswift/pomodoro-pwa/master/assets/images/wallpaper.png)
 
+## Demo
+[https://whiteswift.github.io/pomodoro-pwa](https://whiteswift.github.io/pomodoro-pwa)
+
 ## Usage
 
-1. npm install
+1. Start a server e.g. `python -m SimpleHTTPServer 8080`
 
-2. npm start
-
-3. Navigate to localhost:8080
-
-## Demo
-
-Navigate to https://whiteswift.github.io/
+2. Navigate to localhost:8080
 
 ## Licence
 
