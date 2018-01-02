@@ -1,15 +1,15 @@
 # TODO
 
 ## MVP
-DONE- Display fullscreen in manifest file
-- Replace text with monospace font
+- Media session api for timer
+- Outline and selection: none. Drag down none.
 - Replace tomato image with Lillian's
-- Replace favicon
-- Replace theme colours
+  - Replace favicon
+  - Replace theme colours
 - Refactor layout using flexbox/css grid
 - Add airhorn noise when countdown finishes for mobile using xhr
 - Push notifications
-  - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
+  -  https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
 - Consider more messages: do some work, have a break, Break time is over, do work?
 
 ## Nice to have
