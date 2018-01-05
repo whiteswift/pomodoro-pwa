@@ -20,6 +20,7 @@
     }
   ],
   "start_url": "index.html",
+  "scope": "/",
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#cf3145",
