@@ -61,7 +61,7 @@
       scope: './'
     })
     .then(function(reg) {
-      console.log('Service Worker Registered');
+      console.log(`Service Worker Registered. Scope: ${reg.scope}`);
     });
 
     navigator.serviceWorker.ready.then(function(reg) {
