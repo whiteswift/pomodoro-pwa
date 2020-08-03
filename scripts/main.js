@@ -1,9 +1,24 @@
 (function() {
   'use strict';
 
+  var clock = document.querySelector('#clockdiv');
+  var workButton = document.querySelector('#tomato');
+  var durationSelect = document.querySelector('#duration');
+  var minutesSpan = document.querySelector('#minutes');
+  var secondsSpan = document.querySelector('#seconds');
+  var fiveMinButton = document.querySelector('#five-min');
+  var tenMinButton = document.querySelector('#ten-min');
+  var breakButtons = document.getElementById('break-buttons');
+  var volumeButton = document.getElementById('volume');
+
   var timeinterval = 0;
   var timerType;
   var status = document.getElementById('status');
+
+  function setClock(minutes, seconds) {
+    minutesSpan.innerHTML = minutes;
+    secondsSpan.innerHTML = seconds;
+  }
 
   function getTimeRemaining(endtime) {
     var t = Date.parse(endtime) - Date.parse(new Date());
@@ -20,11 +35,7 @@
     };
   }
 
-  function initializeClock(id, endtime) {
-    var clock = document.getElementById(id);
-    var minutesSpan = clock.querySelector('.minutes');
-    var secondsSpan = clock.querySelector('.seconds');
-
+  function initializeClock(endtime) {
     function updateClock() {
       var t = getTimeRemaining(endtime);
 
@@ -37,7 +48,8 @@
         onTimerFinish();
         let volume = localStorage.getItem('volume');
         volume === 'true' ? alarm.play() : console.log('Volume muted');
-        timerType === 'work' ? status.innerHTML = 'Get ready to work it' : status.innerHTML = 'Chill out mate!';
+
+        status.innerHTML = timerType === 'work' ? 'Get ready to work it!' : 'Time to chill';
       }
     }
 
@@ -45,12 +57,10 @@
     timeinterval = setInterval(updateClock, 1000);
   }
 
-  // var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-
   function setTimer(duration) { // Duration in seconds
     timeinterval ? clearInterval(timeinterval) : console.log('Work Work Work Work Work');
     let deadline = new Date(Date.parse(new Date()) + duration * 1000);
-    initializeClock('clockdiv', deadline);
+    initializeClock(deadline);
   }
 
   function doSomeWork(workit) {
@@ -59,11 +69,13 @@
 
     if (workit) { // If you're doing work, break buttons are hidden
       status.innerHTML = 'Work it';
+      durationSelect.className = 'visible';
       breakButtons.className = 'hidden';
       workButton.className = 'visible';
       timerType = 'work';
     } else {
       status.innerHTML = 'Chill out time';
+      durationSelect.className = 'hidden';
       breakButtons.className = 'visible';
       workButton.className = 'hidden';
       timerType = 'break';
@@ -76,19 +88,13 @@
   }
 
   // Event listeners
-  var workButton = document.querySelector('#tomato');
-  var fiveMinButton = document.querySelector('#five-min');
-  var tenMinButton = document.querySelector('#ten-min');
-  var breakButtons = document.getElementById('break-buttons');
-  var volumeButton = document.getElementById('volume');
-
   workButton.addEventListener('click', function() {
     status.innerHTML = '';
-    setTimer(25*60);
+    setTimer(parseInt(durationSelect.value)*60);
     doSomeWork(true);
   });
 
-  fiveMinButton.addEventListener('click', function() {
+  fiveMinButton.addEventListener('click', function() { 
     setTimer(5*60);
     doSomeWork(false);
   });
@@ -96,6 +102,10 @@
   tenMinButton.addEventListener('click', function() {
     setTimer(10*60);
     doSomeWork(false);
+  });
+
+  durationSelect.addEventListener('change', function(e) {
+    setClock(e.target.value,'00');
   });
 
   volumeButton.addEventListener('click', function(){
@@ -107,16 +117,10 @@
       volumeButton.children[0].setAttribute('src','assets/images/volume_on.svg');
       localStorage.setItem('volume',true);
     }
-
   });
 
-  // Add to homescreen event
   window.addEventListener('beforeinstallprompt', function(e) {
-
     e.userChoice.then(function(choiceResult) {
-
-      console.log(choiceResult.outcome);
-
       if(choiceResult.outcome == 'dismissed') {
         console.log('User cancelled home screen install');
       }
@@ -126,6 +130,7 @@
     });
   });
 
+  // Sound and notifications
   function sound(src) {
       var self = this;
       self.sound = document.createElement("audio");
@@ -151,13 +156,13 @@
       alert("This browser does not support desktop notification");
     }
     else if (Notification.permission === "granted") {
-      var notification = new Notification("Timer finished!");
+      new Notification("Timer finished!");
     }
     else if (Notification.permission !== 'denied') {
       Notification.requestPermission(function (permission) {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
-          var notification = new Notification("Timer finished!");
+          new Notification("Timer finished!");
         }
       });
     }
@@ -177,5 +182,4 @@
   // Request desktop permissions
   Notification.requestPermission();
   checkVolume();
-
 }());
