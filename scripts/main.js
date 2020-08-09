@@ -104,10 +104,6 @@
     doSomeWork(false);
   });
 
-  durationSelect.addEventListener('change', function(e) {
-    setClock(e.target.value,'00');
-  });
-
   volumeButton.addEventListener('click', function(){
     if (localStorage.getItem('volume') === 'true') {
       volumeButton.children[0].setAttribute('src','assets/images/volume_muted.svg');
