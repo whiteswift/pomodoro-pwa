@@ -1,15 +1,16 @@
-(function() {
+(function () {
   'use strict';
 
   var clock = document.querySelector('#clockdiv');
   var workButton = document.querySelector('#tomato');
-  var durationSelect = document.querySelector('#duration');
   var minutesSpan = document.querySelector('#minutes');
   var secondsSpan = document.querySelector('#seconds');
   var fiveMinButton = document.querySelector('#five-min');
   var tenMinButton = document.querySelector('#ten-min');
   var breakButtons = document.getElementById('break-buttons');
   var volumeButton = document.getElementById('volume');
+  var durationSelect = document.querySelector('#duration-select');
+  var durationButtonToggle = document.getElementById('btn-duration-toggle');
 
   var timeinterval = 0;
   var timerType;
@@ -69,13 +70,11 @@
 
     if (workit) { // If you're doing work, break buttons are hidden
       status.innerHTML = 'Work it';
-      durationSelect.className = 'visible';
       breakButtons.className = 'hidden';
       workButton.className = 'visible';
       timerType = 'work';
     } else {
       status.innerHTML = 'Chill out time';
-      durationSelect.className = 'hidden';
       breakButtons.className = 'visible';
       workButton.className = 'hidden';
       timerType = 'break';
@@ -88,36 +87,41 @@
   }
 
   // Event listeners
-  workButton.addEventListener('click', function() {
+  workButton.addEventListener('click', function () {
     status.innerHTML = '';
-    setTimer(parseInt(durationSelect.value)*60);
+    setTimer(parseInt(durationSelect.value) * 60);
     doSomeWork(true);
   });
 
-  fiveMinButton.addEventListener('click', function() { 
-    setTimer(5*60);
+  fiveMinButton.addEventListener('click', function () {
+    setTimer(5 * 60);
     doSomeWork(false);
   });
 
-  tenMinButton.addEventListener('click', function() {
-    setTimer(10*60);
+  tenMinButton.addEventListener('click', function () {
+    setTimer(10 * 60);
     doSomeWork(false);
   });
 
-  volumeButton.addEventListener('click', function(){
+  volumeButton.addEventListener('click', function () {
     if (localStorage.getItem('volume') === 'true') {
-      volumeButton.children[0].setAttribute('src','assets/images/volume_muted.svg');
-      localStorage.setItem('volume',false);
+      volumeButton.children[0].setAttribute('src', 'assets/images/volume_muted.svg');
+      localStorage.setItem('volume', false);
     }
     else {
-      volumeButton.children[0].setAttribute('src','assets/images/volume_on.svg');
-      localStorage.setItem('volume',true);
+      volumeButton.children[0].setAttribute('src', 'assets/images/volume_on.svg');
+      localStorage.setItem('volume', true);
     }
   });
 
-  window.addEventListener('beforeinstallprompt', function(e) {
-    e.userChoice.then(function(choiceResult) {
-      if(choiceResult.outcome == 'dismissed') {
+  durationButtonToggle.addEventListener('click', () => {
+    durationButtonToggle.classList.toggle('duration-toggle-open');
+    durationSelect.classList.toggle('duration-select-visible')
+  });
+
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.userChoice.then(function (choiceResult) {
+      if (choiceResult.outcome == 'dismissed') {
         console.log('User cancelled home screen install');
       }
       else {
@@ -128,19 +132,19 @@
 
   // Sound and notifications
   function sound(src) {
-      var self = this;
-      self.sound = document.createElement("audio");
-      self.sound.src = src;
-      self.sound.setAttribute("preload", "auto");
-      self.sound.setAttribute("controls", "none");
-      self.sound.style.display = "none";
-      document.body.appendChild(self.sound);
-      self.play = function(){
-          self.sound.play();
-      };
-      self.stop = function(){
-          self.sound.pause();
-      };
+    var self = this;
+    self.sound = document.createElement("audio");
+    self.sound.src = src;
+    self.sound.setAttribute("preload", "auto");
+    self.sound.setAttribute("controls", "none");
+    self.sound.style.display = "none";
+    document.body.appendChild(self.sound);
+    self.play = function () {
+      self.sound.play();
+    };
+    self.stop = function () {
+      self.sound.pause();
+    };
   }
 
   var alarm = new sound('assets/media/alarm.mp3');
@@ -164,14 +168,14 @@
     }
   }
 
-  function checkVolume(){
+  function checkVolume() {
     let vol = localStorage.getItem('volume');
     if (vol === 'false' || vol === '') {
-      volumeButton.children[0].setAttribute('src','assets/images/volume_muted.svg');
-      localStorage.setItem('volume',false);
+      volumeButton.children[0].setAttribute('src', 'assets/images/volume_muted.svg');
+      localStorage.setItem('volume', false);
     } else {
-      volumeButton.children[0].setAttribute('src','assets/images/volume_on.svg');
-      localStorage.setItem('volume',true);
+      volumeButton.children[0].setAttribute('src', 'assets/images/volume_on.svg');
+      localStorage.setItem('volume', true);
     }
   }
 

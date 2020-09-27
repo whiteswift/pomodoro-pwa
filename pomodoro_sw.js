@@ -1,4 +1,4 @@
-// v1.7
+// v2.0
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -17,12 +17,12 @@ self.addEventListener('install', e => {
         'assets/images/volume_muted.svg',
         'assets/media/alarm.mp3'
       ])
-      .then(() => self.skipWaiting());
+        .then(() => self.skipWaiting());
     })
   )
 });
 
-self.addEventListener('activate',  event => {
+self.addEventListener('activate', event => {
   event.waitUntil(self.clients.claim());
 });
 

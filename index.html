@@ -1,4 +1,5 @@
 <html>
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Pomodoro</title>
@@ -17,10 +18,17 @@
   <meta property="og:title" content="Pomodoro 🍅">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://whiteswift.github.io/pomodoro-pwa/">
-  <meta property="og:description" content="A glorified egg timer progressive web app. Add it to your homescreen, it acts like a native app!">
-  <style>body{background-color:#cf3145;text-align:center;}</style>
+  <meta property="og:description"
+    content="A glorified egg timer progressive web app. Add it to your homescreen, it acts like a native app!">
+  <style>
+    body {
+      background-color: #cf3145;
+      text-align: center;
+    }
+  </style>
   <link rel='stylesheet' type='text/css' href='styles/main.css' />
 </head>
+
 <body>
   <div id='pomodoro'>
     <h1 id='status'>Get ready to work it</h1>
@@ -46,10 +54,13 @@
               10 MINS
             </button>
           </div>
-          <select name='duration' id='duration'>
-            <option value='45'>45</option>
-            <option value='25'>25</option>
-          </select>
+          <div class='duration-toggle-container'>
+            <button id='btn-duration-toggle'>+</button>
+            <select name='duration' id='duration-select' class='duration-select'>
+              <option value='45'>45</option>
+              <option value='25'>25</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -60,19 +71,20 @@
     </div>
   </div>
   <script type="text/javascript">
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('pomodoro_sw.js', {
-      scope: './'
-    })
-    .then(function(reg) {
-      console.log(`Service Worker Registered. Scope: ${reg.scope}`);
-    });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('pomodoro_sw.js', {
+        scope: './'
+      })
+        .then(function (reg) {
+          console.log(`Service Worker Registered. Scope: ${reg.scope}`);
+        });
 
-    navigator.serviceWorker.ready.then(function(reg) {
-      console.log('Service Worker Ready');
-    })
-  }
+      navigator.serviceWorker.ready.then(function (reg) {
+        console.log('Service Worker Ready');
+      })
+    }
   </script>
   <script async src='scripts/main.js'></script>
 </body>
+
 </html>

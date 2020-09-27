@@ -1,145 +1,202 @@
 body {
-    margin: 0;
-    font-weight: 100;
-    -webkit-font-smoothing: antialiased;
-    font-display: swap;
+  margin: 0;
+  font-weight: 100;
+  -webkit-font-smoothing: antialiased;
+  font-display: swap;
 }
+
 * {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
 }
+
 .visible {
   display: inline-block;
 }
+
 .hidden {
   display: none;
 }
+
 #container, body, html {
-    height: 100%
+  height: 100%
 }
+
 #container {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column
 }
+
 h1 {
-    color: #eee;
-    font-weight: 100;
-    font-size: 8vw;
-    font-family: 'Gotham-medium', Arial, sans-serif;
-    padding-top: 6vw;
-    transition: 0.5s ease;
+  color: #eee;
+  font-weight: 100;
+  font-size: 8vw;
+  font-family: 'Gotham-medium', Arial, sans-serif;
+  padding-top: 6vw;
+  transition: 0.5s ease;
 }
 
 #clockdiv {
-    color: #fff;
-    display: inline-block;
-    font-weight: 100;
-    text-align: center;
-    font-size: 5vmin;
-    position: relative;
+  color: #fff;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 5vmin;
+  position: relative;
 }
-#clockdiv div > span {
-    padding: 0.3em;
-    border-radius: 3px;
-    background: #c22640;
-    display: inline-block;
-    letter-spacing: 1px;
-    font-size: 12vmax;
-    color: white;
+
+#clockdiv div>span {
+  padding: 0.3em;
+  border-radius: 3px;
+  background: #c22640;
+  display: inline-block;
+  letter-spacing: 1px;
+  font-size: 12vmax;
+  color: white;
 }
+
 #clock-container {
   width: 100%;
 }
+
 #time-container {
-    font-family: Helvetica, Arial, Sans-serif;
-    padding: 10px;
-    border-radius: 3px;
+  font-family: Helvetica, Arial, Sans-serif;
+  padding: 10px;
+  border-radius: 3px;
 }
-#time-container > div {
-    display: inline-block;
+
+#time-container>div {
+  display: inline-block;
 }
+
 #tomato {
-    background: rgba(255, 255, 255, 0);
-    border: 0;
-    cursor: pointer;
-    color: white;
-    font-size: 22vmin;
-    outline: none;
+  background: rgba(255, 255, 255, 0);
+  border: 0;
+  cursor: pointer;
+  color: white;
+  font-size: 22vmin;
+  outline: none;
 }
+
 #volume-container {
-    width: 100%;
-    position: fixed;
-    bottom: 5vmin;
+  width: 100%;
+  position: fixed;
+  bottom: 5vmin;
 }
+
 #volume {
-    border: 0.3vw solid white;
-    width: 8vmin;
-    height: 8vmin;
-    border-radius: 100%;
-    margin: 0 auto;
-    cursor: pointer;
-    outline: none;
+  border: 0.3vw solid white;
+  width: 8vmin;
+  height: 8vmin;
+  border-radius: 100%;
+  margin: 0 auto;
+  cursor: pointer;
+  outline: none;
 }
-#volume > img {
-    width: 6vmin;
-    position: relative;
-    top: 1vmin;
+
+#volume>img {
+  width: 6vmin;
+  position: relative;
+  top: 1vmin;
 }
+
 #button-container {
-    margin: 10px;
-    border-radius: 3px;
-    height: 30vmin;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-around;
+  margin: 10px;
+  border-radius: 3px;
+  height: 50vmin;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
 }
-#break-buttons > button {
-    padding: 15px;
-    width: 8em;
-    outline: none;
-    background: #fed345;
-    border: none;
-    color: #a02837;
-    font-weight: 600;
-    font-size: 6vmin;
-    border-radius: 3px;
-    text-align: center;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 2.5vmax;
+
+#break-buttons>button {
+  padding: 15px;
+  width: 8em;
+  outline: none;
+  background: #fed345;
+  border: none;
+  color: #a02837;
+  font-weight: 600;
+  font-size: 6vmin;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 2.5vmax;
 }
+
+.duration-toggle-container {
+  display: flex;
+  flex-flow: column;
+}
+
+#btn-duration-toggle {
+  border: none;
+  background: none;
+  font-size: 30px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.duration-toggle-open {
+  transform: rotate(45deg);
+}
+
+.duration-select {
+  height: 20px;
+  transition: 0.3s;
+  transform: scaleY(0);
+}
+
+.duration-select-visible {
+  transform: scaleY(1);
+}
+
 @-webkit-keyframes fadeOut {
-    from { opacity: 1; }
-      to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
+
 @keyframes fadeOut {
-    from { opacity: 1; }
-      to { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
+
 /*.tomato-active {
     -webkit-animation: fadeOut 0.5s;
     animation: fadeOut 0.5s;
 }*/
+
 @font-face {
-    font-family: 'Gotham-medium';
-    src: url('../assets/fonts/gotham-medium.woff') format('woff');
-    font-display: swap;
+  font-family: 'Gotham-medium';
+  src: url('../assets/fonts/gotham-medium.woff') format('woff');
+  font-display: swap;
 }
