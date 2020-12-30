@@ -73,7 +73,7 @@
   <script type="text/javascript">
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('pomodoro_sw.js', {
-        scope: './'
+        scope: '/pomodoro-pwa/'
       })
         .then(function (reg) {
           console.log(`Service Worker Registered. Scope: ${reg.scope}`);

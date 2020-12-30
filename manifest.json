@@ -20,7 +20,7 @@
     }
   ],
   "start_url": "index.html",
-  "scope": "./",
+  "scope": "/pomodoro-pwa/",
   "display": "fullscreen",
   "orientation": "portrait",
   "background_color": "#cf3145",
