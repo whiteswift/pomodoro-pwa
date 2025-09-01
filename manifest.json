@@ -19,7 +19,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "index.html",
+  "start_url": "/pomodoro-pwa/index.html",
   "scope": "/pomodoro-pwa/",
   "display": "fullscreen",
   "orientation": "portrait",

@@ -1,6 +1,9 @@
 # TODO
 
 ## MVP
+
+- Pause timer for disruptions?
+- Refresh button for 45 min work again
 - Media session api for timer
 - Outline and selection: none. Drag down none.
 - Replace tomato image with Lillian's
@@ -9,10 +12,11 @@
 - Refactor layout using flexbox/css grid
 - Add airhorn noise when countdown finishes for mobile using xhr
 - Push notifications
-  -  https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
+  - https://developers.google.com/web/fundamentals/getting-started/push-notifications/?hl=en
 - Consider more messages: do some work, have a break, Break time is over, do work?
 
 ## Nice to have
+
 - Get some design inspiration
 - Change background colour when working/not working
 - Media queries to support wide screens

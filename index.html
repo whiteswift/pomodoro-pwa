@@ -1,90 +1,107 @@
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Pomodoro</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="A glorified egg timer 🍅" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://whiteswift.github.io/pomodoro-pwa" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Pomodoro 🍅" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Pomodoro 🍅" />
+    <link rel="icon" sizes="144x144" href="assets/images/pomodoro_144.png" />
+    <meta name="theme-color" content="#cf3145" />
+    <meta property="og:title" content="Pomodoro 🍅" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://whiteswift.github.io/pomodoro-pwa/"
+    />
+    <meta
+      property="og:description"
+      content="A glorified egg timer progressive web app. Add it to your homescreen, it acts like a native app!"
+    />
+    <style>
+      body {
+        background-color: #cf3145;
+        text-align: center;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+  </head>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Pomodoro</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="A glorified egg timer 🍅">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="canonical" href="https://whiteswift.github.io/pomodoro-pwa">
-  <link rel="manifest" href="manifest.json">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Pomodoro 🍅">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Pomodoro 🍅">
-  <link rel="icon" sizes="144x144" href="assets/images/pomodoro_144.png">
-  <meta name="theme-color" content="#cf3145">
-  <meta property="og:title" content="Pomodoro 🍅">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://whiteswift.github.io/pomodoro-pwa/">
-  <meta property="og:description"
-    content="A glorified egg timer progressive web app. Add it to your homescreen, it acts like a native app!">
-  <style>
-    body {
-      background-color: #cf3145;
-      text-align: center;
-    }
-  </style>
-  <link rel='stylesheet' type='text/css' href='styles/main.css' />
-</head>
-
-<body>
-  <div id='pomodoro'>
-    <h1 id='status'>Get ready to work it</h1>
-    <div id='clock-container'>
-      <div id="clockdiv">
-        <div id='time-container'>
-          <div>
-            <span id="minutes">45</span>
+  <body>
+    <div id="pomodoro">
+      <h1 id="status">Get ready to work it</h1>
+      <div id="clock-container">
+        <div id="clockdiv">
+          <div id="time-container">
+            <div>
+              <span id="minutes">45</span>
+            </div>
+            <div>
+              <span id="seconds">00</span>
+            </div>
           </div>
-          <div>
-            <span id="seconds">00</span>
-          </div>
-        </div>
-        <div id='button-container'>
-          <button id='tomato' class='visbible'>
-            <img src="assets/images/pomodoro_144.png" alt="tomato button">
-          </button>
-          <div id='break-buttons' class='hidden'>
-            <button id='five-min'>
-              5 MINS
+          <div id="button-container">
+            <button id="tomato" class="visbible">
+              <img src="assets/images/pomodoro_144.png" alt="tomato button" />
             </button>
-            <button id='ten-min'>
-              10 MINS
-            </button>
-          </div>
-          <div class='duration-toggle-container'>
-            <button id='btn-duration-toggle'>+</button>
-            <select name='duration' id='duration-select' class='duration-select'>
-              <option value='45'>45</option>
-              <option value='25'>25</option>
-            </select>
+            <div id="break-buttons" class="hidden">
+              <button id="five-min">5 MINS</button>
+              <button id="ten-min">10 MINS</button>
+            </div>
+            <div
+              class="options-container"
+              role="group"
+              aria-label="Timer options"
+            >
+              <button id="btn-duration-toggle" aria-label="Adjust duration">
+                +
+              </button>
+              <div id="options-select" class="options-select">
+                <select
+                  name="duration"
+                  id="duration-select"
+                  class="duration-select"
+                  aria-label="Duration (minutes)"
+                >
+                  <option value="45">45</option>
+                  <option value="25">25</option>
+                </select>
+                <label class="option option-seconds" for="toggle-seconds">
+                  <input type="checkbox" id="toggle-seconds" checked />
+                  <span>Show seconds</span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id='volume-container'>
-      <div id='volume'>
-        <img src='assets/images/volume_on.svg' alt='volume on/off' />
+      <div id="volume-container">
+        <div id="volume">
+          <img src="assets/images/volume_on.svg" alt="volume on/off" />
+        </div>
       </div>
     </div>
-  </div>
-  <script type="text/javascript">
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('pomodoro_sw.js', {
-        scope: '/pomodoro-pwa/'
-      })
-        .then(function (reg) {
-          console.log(`Service Worker Registered. Scope: ${reg.scope}`);
+    <script type="text/javascript">
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("pomodoro_sw.js", {
+            scope: "/pomodoro-pwa/",
+          })
+          .then(function (reg) {
+            console.log(`Service Worker Registered. Scope: ${reg.scope}`);
+          });
+
+        navigator.serviceWorker.ready.then(function (reg) {
+          console.log("Service Worker Ready");
         });
-
-      navigator.serviceWorker.ready.then(function (reg) {
-        console.log('Service Worker Ready');
-      })
-    }
-  </script>
-  <script async src='scripts/main.js'></script>
-</body>
-
+      }
+    </script>
+    <script async src="scripts/main.js"></script>
+  </body>
 </html>

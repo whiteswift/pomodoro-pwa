@@ -9,12 +9,36 @@
   var tenMinButton = document.querySelector('#ten-min');
   var breakButtons = document.getElementById('break-buttons');
   var volumeButton = document.getElementById('volume');
+  var optionsSelect = document.querySelector('#options-select');
   var durationSelect = document.querySelector('#duration-select');
   var durationButtonToggle = document.getElementById('btn-duration-toggle');
+
+  var toggleSeconds = document.getElementById('toggle-seconds');
+  var secondsBlock = secondsSpan ? secondsSpan.parentElement : null;
 
   var timeinterval = 0;
   var timerType;
   var status = document.getElementById('status');
+
+  function toggleSecondsVisibility(show) {
+    if (!secondsBlock) return;
+    secondsBlock.style.display = show ? '' : 'none';
+    localStorage.setItem('showSeconds', JSON.stringify(show));
+    if (toggleSeconds) toggleSeconds.checked = !!show;
+  }
+
+  // Load saved preference on start (default: show)
+  (function initSecondsPreference() {
+    if (!secondsBlock) return;
+    var saved = localStorage.getItem('showSeconds');
+    var show = saved === null ? true : JSON.parse(saved);
+    toggleSecondsVisibility(show);
+    if (toggleSeconds) {
+      toggleSeconds.addEventListener('change', function () {
+        toggleSecondsVisibility(toggleSeconds.checked);
+      });
+    }
+  })();
 
   function setClock(minutes, seconds) {
     minutesSpan.innerHTML = minutes;
@@ -27,29 +51,20 @@
     var minutes = Math.floor((t / 1000 / 60) % 60);
     var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
     var days = Math.floor(t / (1000 * 60 * 60 * 24));
-    return {
-      'total': t,
-      'days': days,
-      'hours': hours,
-      'minutes': minutes,
-      'seconds': seconds
-    };
+    return { 'total': t, 'days': days, 'hours': hours, 'minutes': minutes, 'seconds': seconds };
   }
 
   function initializeClock(endtime) {
     function updateClock() {
       var t = getTimeRemaining(endtime);
-
       minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
       secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
 
       if (t.total <= 0) {
-        // TODO: add animations
         clearInterval(timeinterval);
         onTimerFinish();
         let volume = localStorage.getItem('volume');
         volume === 'true' ? alarm.play() : console.log('Volume muted');
-
         status.innerHTML = timerType === 'work' ? 'Get ready to work it!' : 'Time to chill';
       }
     }
@@ -68,7 +83,7 @@
     let workButton = document.getElementById('tomato');
     let breakButtons = document.getElementById('break-buttons');
 
-    if (workit) { // If you're doing work, break buttons are hidden
+    if (workit) {
       status.innerHTML = 'Work it';
       breakButtons.className = 'hidden';
       workButton.className = 'visible';
@@ -107,8 +122,7 @@
     if (localStorage.getItem('volume') === 'true') {
       volumeButton.children[0].setAttribute('src', 'assets/images/volume_muted.svg');
       localStorage.setItem('volume', false);
-    }
-    else {
+    } else {
       volumeButton.children[0].setAttribute('src', 'assets/images/volume_on.svg');
       localStorage.setItem('volume', true);
     }
@@ -116,15 +130,14 @@
 
   durationButtonToggle.addEventListener('click', () => {
     durationButtonToggle.classList.toggle('duration-toggle-open');
-    durationSelect.classList.toggle('duration-select-visible')
+    optionsSelect.classList.toggle('options-select-visible');
   });
 
   window.addEventListener('beforeinstallprompt', function (e) {
     e.userChoice.then(function (choiceResult) {
       if (choiceResult.outcome == 'dismissed') {
         console.log('User cancelled home screen install');
-      }
-      else {
+      } else {
         console.log('User added to home screen');
       }
     });
@@ -139,31 +152,20 @@
     self.sound.setAttribute("controls", "none");
     self.sound.style.display = "none";
     document.body.appendChild(self.sound);
-    self.play = function () {
-      self.sound.play();
-    };
-    self.stop = function () {
-      self.sound.pause();
-    };
+    self.play = function () { self.sound.play(); };
+    self.stop = function () { self.sound.pause(); };
   }
 
   var alarm = new sound('assets/media/alarm.mp3');
 
-  // Desktop notifications
   function displayNotification() {
-    // Check if the browser supports notifications
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
-    }
-    else if (Notification.permission === "granted") {
+    } else if (Notification.permission === "granted") {
       new Notification("Timer finished!");
-    }
-    else if (Notification.permission !== 'denied') {
+    } else if (Notification.permission !== 'denied') {
       Notification.requestPermission(function (permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          new Notification("Timer finished!");
-        }
+        if (permission === "granted") new Notification("Timer finished!");
       });
     }
   }
@@ -179,7 +181,6 @@
     }
   }
 
-  // Request desktop permissions
   Notification.requestPermission();
   checkVolume();
 }());
